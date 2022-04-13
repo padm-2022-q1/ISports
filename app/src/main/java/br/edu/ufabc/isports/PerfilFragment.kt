@@ -1,21 +1,21 @@
 package br.edu.ufabc.isports
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import br.edu.ufabc.isports.databinding.FragmentMainBinding
+import br.edu.ufabc.isports.databinding.FragmentPerfilBinding
 
-class MainFragment : Fragment() {
-    private lateinit var binding: FragmentMainBinding
+class PerfilFragment : Fragment() {
+    private lateinit var binding: FragmentPerfilBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentPerfilBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

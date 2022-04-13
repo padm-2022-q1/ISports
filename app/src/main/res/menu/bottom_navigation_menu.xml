@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_action_meus_jogos"
+        android:id="@+id/menu_meus_jogos"
+        android:enabled="true"
+        android:title="@string/menu_meus_jogos_title"/>
+    <item
+        android:icon="@drawable/ic_action_explorar"
+        android:id="@+id/menu_explorar"
+        android:enabled="true"
+        android:title="@string/menu_explorar_title"/>
+    <item
+        android:icon="@drawable/ic_action_perfil"
+        android:id="@+id/menu_perfil"
+        android:enabled="true"
+        android:title="@string/menu_perfil_title"/>
+</menu>

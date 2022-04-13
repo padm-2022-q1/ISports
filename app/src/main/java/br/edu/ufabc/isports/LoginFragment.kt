@@ -29,7 +29,7 @@ class LoginFragment : Fragment(){
 
     private fun bindEvents() {
         binding.loginButton.setOnClickListener {
-            findNavController().navigate(R.id.mainFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_meusJogosFragment)
         }
     }
 }

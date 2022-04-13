@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="br.edu.ufabc.isports.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_cadastroFragment"
+            app:destination="@id/cadastroFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_meusJogosFragment"
+            app:destination="@id/meusJogosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cadastroFragment"
+        android:name="br.edu.ufabc.isports.CadastroFragment"
+        android:label="fragment_cadastro"
+        tools:layout="@layout/fragment_cadastro" >
+        <action
+            android:id="@+id/action_cadastroFragment_to_meusJogosFragment"
+            app:destination="@id/meusJogosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/explorarFragment"
+        android:name="br.edu.ufabc.isports.ExplorarFragment"
+        android:label="fragment_explorar"
+        tools:layout="@layout/fragment_explorar" >
+        <action
+            android:id="@+id/action_explorarFragment_to_meusJogosFragment"
+            app:destination="@id/meusJogosFragment" />
+        <action
+            android:id="@+id/action_explorarFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/meusJogosFragment"
+        android:name="br.edu.ufabc.isports.MeusJogosFragment"
+        android:label="fragment_meus_jogos"
+        tools:layout="@layout/fragment_meus_jogos" >
+        <action
+            android:id="@+id/action_meusJogosFragment_to_explorarFragment"
+            app:destination="@id/explorarFragment" />
+        <action
+            android:id="@+id/action_meusJogosFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="br.edu.ufabc.isports.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_perfilFragment_to_explorarFragment"
+            app:destination="@id/explorarFragment" />
+        <action
+            android:id="@+id/action_perfilFragment_to_meusJogosFragment"
+            app:destination="@id/meusJogosFragment" />
+        <action
+            android:id="@+id/action_perfilFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+</navigation>
