@@ -13,4 +13,7 @@
     <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
     <string name="login_cadastro_label">Ainda não tem conta? Cadastre-se</string>
+    <string name="signup_email_hint">E-mail</string>
+    <string name="signup_confirm_password_hint">Confirm Password</string>
+    <string name="signupbuttom_text">Sign Up</string>
 </resources>
