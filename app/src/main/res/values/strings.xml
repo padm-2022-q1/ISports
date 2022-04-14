@@ -23,6 +23,9 @@
     <string name="menu_historico_title">Histórico</string>
     <string name="explorar_date_de_text_default">Data De</string>
     <string name="explorar_date_ate_text_default">Data Ate</string>
+    <string name="explorar_hora_de_text_default">Hora De</string>
+    <string name="explorar_hora_ate_text_default">Hora Ate</string>
+    <string name="explorar_filtrar_button_text">Filtrar</string>
     <string-array name="tipos_jogos">
         <item>Basquete</item>
         <item>Futsal</item>

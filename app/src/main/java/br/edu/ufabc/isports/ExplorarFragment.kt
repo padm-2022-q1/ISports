@@ -91,6 +91,9 @@ class ExplorarFragment : Fragment() {
             }
             true
         }
+        binding.explorarFiltrarButton.setOnClickListener {
+            binding.explorarMatchNotFoundTextView.visibility = View.VISIBLE
+        }
     }
     private fun adapterSpinner(spinner: Spinner, array:Int){
         ArrayAdapter.createFromResource(
