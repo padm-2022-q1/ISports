@@ -21,6 +21,8 @@
     <string name="match_not_found_historico">Nenhum jogo foi encontrado no histórico!</string>
     <string name="dis_text">Distância (Km)</string>
     <string name="menu_historico_title">Histórico</string>
+    <string name="explorar_date_de_text_default">Data De</string>
+    <string name="explorar_date_ate_text_default">Data Ate</string>
     <string-array name="tipos_jogos">
         <item>Basquete</item>
         <item>Futsal</item>

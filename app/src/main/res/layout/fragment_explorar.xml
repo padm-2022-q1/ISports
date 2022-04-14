@@ -22,6 +22,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="15dp"
         android:stepSize="1.0"
+        android:value="10.0"
         android:valueFrom="0.0"
         android:valueTo="100.0"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,22 +43,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/slider_distancia" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_jogos_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/match_not_found"
-        android:visibility="invisible"
         android:textColor="@color/black"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,5 +63,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/explorar_data_de"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:text="@string/explorar_date_de_text_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dist_text_view" />
+
+    <TextView
+        android:id="@+id/explorar_data_ate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/explorar_date_ate_text_default"
+        android:textColor="@color/black"
+        android:layout_marginEnd="50dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/explorar_data_de" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
