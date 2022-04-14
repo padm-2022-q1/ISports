@@ -22,6 +22,7 @@ class ExplorarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentExplorarBinding.inflate(inflater, container, false)
+        binding.bottomNavigationExplorar.selectedItemId = R.id.menu_explorar
         bindEvents()
         createSpinner()
         createDate()

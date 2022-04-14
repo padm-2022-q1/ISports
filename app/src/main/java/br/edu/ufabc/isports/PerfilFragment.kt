@@ -17,6 +17,7 @@ class PerfilFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPerfilBinding.inflate(inflater, container, false)
+        binding.bottomNavigationPerfil.selectedItemId = R.id.menu_perfil
         bindEvents()
         return binding.root
     }

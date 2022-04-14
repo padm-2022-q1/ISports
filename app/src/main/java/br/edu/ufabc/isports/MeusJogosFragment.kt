@@ -20,8 +20,10 @@ class MeusJogosFragment : Fragment() {
     ): View {
         binding = FragmentMeusJogosBinding.inflate(inflater, container, false)
 
-        if(_args.isHistorico)
+        if(_args.isHistorico) {
             binding.meusJogosMatchNotFoundTextView.text = getString(R.string.match_not_found_historico)
+            binding.bottomNavigationJogos.selectedItemId = R.id.menu_historico
+        }
         bindEvents()
         return binding.root
     }
