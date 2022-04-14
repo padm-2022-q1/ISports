@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/app_logo_cadastro"
-        android:layout_width="200dp"
-        android:layout_height="128dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:contentDescription="@string/image_view_logo_description"
         android:src="@drawable/ic_isports_logo"
