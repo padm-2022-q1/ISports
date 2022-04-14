@@ -87,5 +87,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/explorar_data_de" />
 
+    <TextView
+        android:id="@+id/explorar_time_de"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/explorar_hora_de_text_default"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@+id/explorar_data_de"
+        app:layout_constraintTop_toBottomOf="@+id/explorar_data_de" />
+
+    <TextView
+        android:id="@+id/explorar_time_Ate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/explorar_hora_ate_text_default"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/explorar_data_ate"
+        app:layout_constraintTop_toBottomOf="@+id/explorar_data_ate" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

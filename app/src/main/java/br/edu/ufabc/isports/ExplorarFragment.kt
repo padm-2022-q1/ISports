@@ -1,6 +1,7 @@
 package br.edu.ufabc.isports
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,7 +27,23 @@ class ExplorarFragment : Fragment() {
         bindEvents()
         createSpinner()
         createDate()
+        createTime()
         return binding.root
+    }
+
+    private fun createTime() {
+        val timeDialogDe = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+            binding.explorarTimeDe.text = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+        }
+        val timeDialogAte = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+            binding.explorarTimeAte.text = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+        }
+        binding.explorarTimeDe.setOnClickListener {
+            TimePickerDialog(it.context, timeDialogDe, 0, 0, true).show()
+        }
+        binding.explorarTimeAte.setOnClickListener {
+            TimePickerDialog(it.context, timeDialogAte, 0, 0, true).show()
+        }
     }
 
     private fun createDate() {
