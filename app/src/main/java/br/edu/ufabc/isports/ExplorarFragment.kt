@@ -94,6 +94,9 @@ class ExplorarFragment : Fragment() {
         binding.explorarFiltrarButton.setOnClickListener {
             binding.explorarMatchNotFoundTextView.visibility = View.VISIBLE
         }
+        binding.explorarNovoJogoTextView.setOnClickListener {
+            findNavController().navigate(R.id.action_explorarFragment_to_novoJogoFragment)
+        }
     }
     private fun adapterSpinner(spinner: Spinner, array:Int){
         ArrayAdapter.createFromResource(

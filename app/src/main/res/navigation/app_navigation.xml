@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_explorarFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
+        <action
+            android:id="@+id/action_explorarFragment_to_novoJogoFragment"
+            app:destination="@id/novoJogoFragment" />
     </fragment>
     <fragment
         android:id="@+id/meusJogosFragment"
@@ -71,4 +74,9 @@
             android:id="@+id/action_perfilFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/novoJogoFragment"
+        android:name="br.edu.ufabc.isports.NovoJogoFragment"
+        android:label="fragment_novo_jogo"
+        tools:layout="@layout/fragment_novo_jogo" />
 </navigation>

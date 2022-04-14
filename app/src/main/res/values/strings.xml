@@ -26,6 +26,7 @@
     <string name="explorar_hora_de_text_default">Hora De</string>
     <string name="explorar_hora_ate_text_default">Hora Ate</string>
     <string name="explorar_filtrar_button_text">Filtrar</string>
+    <string name="explorar_novo_jogo_text_view_text">+ Novo Jogo</string>
     <string-array name="tipos_jogos">
         <item>Basquete</item>
         <item>Futsal</item>
@@ -66,4 +67,5 @@
         <item>30</item>
         <item>31</item>
     </string-array>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
