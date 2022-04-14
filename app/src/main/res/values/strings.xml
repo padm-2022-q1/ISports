@@ -35,4 +35,10 @@
         <item>Ping-Pong</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username_text">Username</string>
+    <string name="signup_address_hint">Endereço</string>
+    <string name="log_out_text">Log Out</string>
+    <string name="data_text">Data</string>
+    <string name="hour_text">Hora</string>
+    <string name="novo_jogo_button_text">Novo Jogo</string>
 </resources>

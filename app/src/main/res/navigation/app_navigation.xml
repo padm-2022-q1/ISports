@@ -78,5 +78,9 @@
         android:id="@+id/novoJogoFragment"
         android:name="br.edu.ufabc.isports.NovoJogoFragment"
         android:label="fragment_novo_jogo"
-        tools:layout="@layout/fragment_novo_jogo" />
+        tools:layout="@layout/fragment_novo_jogo" >
+        <action
+            android:id="@+id/action_novoJogoFragment_to_explorarFragment"
+            app:destination="@id/explorarFragment" />
+    </fragment>
 </navigation>

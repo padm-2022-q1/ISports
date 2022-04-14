@@ -31,5 +31,9 @@ class PerfilFragment : Fragment() {
             }
             true
         }
+
+        binding.logoutButton.setOnClickListener(){
+            findNavController().navigate(R.id.action_perfilFragment_to_loginFragment)
+        }
     }
 }
