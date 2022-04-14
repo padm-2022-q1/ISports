@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000a0e</color>
+    <color name="black_tint_10">#1a2326</color>
+    <color name="black_tint_20">#333b3e</color>
+    <color name="black_tint_30">#4d5456</color>
+    <color name="black_tint_40">#666c6e</color>
+    <color name="black_tint_50">#808587</color>
+    <color name="black_tint_60">#999d9f</color>
+    <color name="black_tint_70">#b3b6b7</color>
+    <color name="black_tint_80">#cccecf</color>
+    <color name="black_tint_90">#e6e7e7</color>
+    <color name="white">#ffffff</color>
+    <color name="grey_tint_10">#5f6567</color>
+    <color name="grey_tint_20">#717678</color>
+    <color name="grey_tint_30">#828789</color>
+    <color name="grey_tint_40">#94989a</color>
+    <color name="grey_tint_50">#a6aaab</color>
+    <color name="grey_tint_60">#b8bbbb</color>
+    <color name="grey_tint_70">#cacccc</color>
+    <color name="grey_tint_80">#dbdddd</color>
+    <color name="grey_tint_90">#edeeee</color>
 </resources>

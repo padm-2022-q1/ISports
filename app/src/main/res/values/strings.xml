@@ -3,12 +3,14 @@
     <string name="main_fragment_default">Main Fragment</string>
     <string name="loginButton_Text">Login</string>
     <string name="cadastro_fragment_default">Cadastro Fragment</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="explorar_fragment_default">Explorar Fragment</string>
     <string name="meus_jogos_fragment_default">Meus jogos Fragment</string>
     <string name="perfil_fragment_default">Perfil Fragment</string>
     <string name="menu_meus_jogos_title">Meus Jogos</string>
     <string name="menu_explorar_title">Explorar</string>
     <string name="menu_perfil_title">Perfil</string>
+    <string name="image_view_logo_description">Logo do ISports</string>
+    <string name="login_username_hint">Username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_cadastro_label">Ainda não tem conta? Cadastre-se</string>
 </resources>
