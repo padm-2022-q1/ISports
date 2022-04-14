@@ -18,7 +18,9 @@
     <string name="signupbuttom_text">Cadastre-se</string>
     <string name="historico_string">Histórico</string>
     <string name="match_not_found">Nenhum jogo foi encontrado!</string>
-    <string name="dis_text">Distância</string>
+    <string name="match_not_found_historico">Nenhum jogo foi encontrado no histórico!</string>
+    <string name="dis_text">Distância (Km)</string>
+    <string name="menu_historico_title">Histórico</string>
     <string-array name="tipos_jogos">
         <item>Basquete</item>
         <item>Futsal</item>

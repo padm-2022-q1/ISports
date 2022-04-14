@@ -26,20 +26,13 @@ class ExplorarFragment : Fragment() {
     private fun bindEvents()
     {
         val spinner: Spinner = binding.tiposJogos
-        val dateDe: Spinner = binding.dateDe
-        val dateAte: Spinner = binding.dateAte
         adapterSpinner(spinner,R.array.tipos_jogos)
-        adapterSpinner(dateDe,R.array.data_range)
-        adapterSpinner(dateAte,R.array.data_range)
 
-        binding.bottomNavigationExplorar.setOnItemSelectedListener() { item ->
+        binding.bottomNavigationExplorar.setOnItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.menu_meus_jogos -> {
-                    findNavController().navigate(R.id.action_explorarFragment_to_meusJogosFragment)
-                }
-                R.id.menu_perfil -> {
-                    findNavController().navigate(R.id.action_explorarFragment_to_perfilFragment)
-                }
+                R.id.menu_meus_jogos -> findNavController().navigate(R.id.action_explorarFragment_to_meusJogosFragment)
+                R.id.menu_historico -> findNavController().navigate(ExplorarFragmentDirections.actionExplorarFragmentToMeusJogosFragment(isHistorico = true))
+                R.id.menu_perfil -> findNavController().navigate(R.id.action_explorarFragment_to_perfilFragment)
             }
             true
         }

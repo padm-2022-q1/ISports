@@ -22,14 +22,11 @@ class PerfilFragment : Fragment() {
     }
 
     private fun bindEvents() {
-        binding.bottomNavigationPerfil.setOnItemSelectedListener() { item ->
+        binding.bottomNavigationPerfil.setOnItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.menu_explorar -> {
-                    findNavController().navigate(R.id.action_perfilFragment_to_explorarFragment)
-                }
-                R.id.menu_meus_jogos -> {
-                    findNavController().navigate(R.id.action_perfilFragment_to_meusJogosFragment)
-                }
+                R.id.menu_meus_jogos -> findNavController().navigate(R.id.action_perfilFragment_to_meusJogosFragment)
+                R.id.menu_historico -> findNavController().navigate(PerfilFragmentDirections.actionPerfilFragmentToMeusJogosFragment(isHistorico = true))
+                R.id.menu_explorar -> findNavController().navigate(R.id.action_perfilFragment_to_explorarFragment)
             }
             true
         }

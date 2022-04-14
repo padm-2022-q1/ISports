@@ -48,6 +48,13 @@
         <action
             android:id="@+id/action_meusJogosFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
+        <argument
+            android:name="isHistorico"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_meusJogosFragment_self"
+            app:destination="@id/meusJogosFragment" />
     </fragment>
     <fragment
         android:id="@+id/perfilFragment"
