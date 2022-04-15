@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MeusJogosFragment">
+    tools:context=".MeusJogosFragment"
+    android:background="@color/black_tint_30">
 
     <TextView
         android:id="@+id/meusJogos_match_not_found_textView"
@@ -12,6 +13,8 @@
         android:layout_height="wrap_content"
         android:text="@string/match_not_found"
         android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
