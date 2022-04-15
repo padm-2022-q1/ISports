@@ -42,4 +42,5 @@
     <string name="hour_text">Hora</string>
     <string name="novo_jogo_button_text">Novo Jogo</string>
     <string name="alterar_cadastro_text">Alterar cadastro</string>
+    <string name="novo_jogo_text_view">Novo Jogo</string>
 </resources>

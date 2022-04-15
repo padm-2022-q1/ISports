@@ -1,55 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black_tint_30"
     tools:context=".NovoJogoFragment">
 
-    <Spinner
-        android:id="@+id/tipos_jogos"
+    <TextView
+        android:id="@+id/novo_jogo_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
+        android:textColor="@color/black"
+        android:text="@string/novo_jogo_text_view"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:id="@+id/tipos_jogos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="20dp"
+        android:background="@color/grey_tint_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/novo_jogo_text_view" />
+
     <TextView
         android:id="@+id/new_game_data_de"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_margin="15dp"
         android:text="@string/data_text"
+        android:padding="15dp"
+        android:background="@color/grey_tint_50"
         android:textColor="@color/black"
-        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tipos_jogos"
         app:layout_constraintTop_toBottomOf="@+id/tipos_jogos" />
 
     <TextView
         android:id="@+id/new_game_time_De"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_margin="15dp"
+        android:background="@color/grey_tint_50"
+        android:padding="20dp"
         android:text="@string/explorar_hora_de_text_default"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/new_game_data_de"
-        app:layout_constraintTop_toTopOf="@+id/new_game_data_de" />
+        app:layout_constraintEnd_toStartOf="@+id/new_game_time_Ate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_game_data_de" />
 
     <TextView
         android:id="@+id/new_game_time_Ate"
-        android:layout_width="wrap_content"
+        android:layout_width="183dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_margin="15dp"
+        android:background="@color/grey_tint_50"
+        android:padding="20dp"
         android:text="@string/explorar_hora_ate_text_default"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/new_game_time_De"
-        app:layout_constraintTop_toTopOf="@+id/new_game_time_De" />
+        app:layout_constraintEnd_toEndOf="@+id/new_game_data_de"
+        app:layout_constraintTop_toBottomOf="@+id/new_game_data_de" />
 
     <EditText
         android:id="@+id/cadastro_endereço_edit_text"
@@ -58,10 +79,9 @@
         android:layout_margin="15dp"
         android:hint="@string/signup_address_hint"
         android:padding="20dp"
+        android:background="@color/grey_tint_50"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
-        android:drawableStart="@drawable/ic_baseline_home"
-        android:drawablePadding="20dp"
         android:inputType="textPostalAddress"
         android:autofillHints="postalAddress"
         app:layout_constraintEnd_toEndOf="parent"
