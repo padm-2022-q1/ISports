@@ -41,4 +41,5 @@
     <string name="data_text">Data</string>
     <string name="hour_text">Hora</string>
     <string name="novo_jogo_button_text">Novo Jogo</string>
+    <string name="alterar_cadastro_text">Alterar cadastro</string>
 </resources>

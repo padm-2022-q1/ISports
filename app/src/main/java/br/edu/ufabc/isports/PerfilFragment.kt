@@ -31,8 +31,10 @@ class PerfilFragment : Fragment() {
             }
             true
         }
-
-        binding.logoutButton.setOnClickListener(){
+        binding.alterarCadastroButton.setOnClickListener {
+            findNavController().navigate(PerfilFragmentDirections.actionPerfilFragmentToCadastroFragment(isAlteracao = true))
+        }
+        binding.logoutButton.setOnClickListener{
             findNavController().navigate(R.id.action_perfilFragment_to_loginFragment)
         }
     }

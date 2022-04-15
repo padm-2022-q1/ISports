@@ -29,20 +29,17 @@
         app:layout_constraintStart_toEndOf="@+id/app_logo_cadastro"
         app:layout_constraintTop_toTopOf="@+id/app_logo_cadastro" />
 
-    <EditText
-        android:id="@+id/cadastro_endereço_edit_text"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/alterar_cadastro_Button"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:background="@color/grey_tint_50"
-        android:hint="@string/signup_address_hint"
         android:padding="20dp"
+        android:backgroundTint="@color/grey_tint_50"
+        android:text="@string/alterar_cadastro_text"
+        android:textStyle="bold"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:drawableStart="@drawable/ic_baseline_home"
-        android:drawablePadding="20dp"
-        android:inputType="textPostalAddress"
-        android:autofillHints="postalAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_logo_cadastro" />
@@ -60,7 +57,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cadastro_endereço_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/alterar_cadastro_Button" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_perfil"

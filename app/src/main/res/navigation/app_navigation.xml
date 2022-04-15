@@ -24,6 +24,10 @@
         <action
             android:id="@+id/action_cadastroFragment_to_meusJogosFragment"
             app:destination="@id/meusJogosFragment" />
+        <argument
+            android:name="isAlteracao"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/explorarFragment"
@@ -73,6 +77,9 @@
         <action
             android:id="@+id/action_perfilFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_perfilFragment_to_cadastroFragment"
+            app:destination="@id/cadastroFragment" />
     </fragment>
     <fragment
         android:id="@+id/novoJogoFragment"
