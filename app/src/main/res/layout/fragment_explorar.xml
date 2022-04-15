@@ -10,26 +10,23 @@
         android:id="@+id/tipos_jogos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_margin="15dp"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/explorar_novo_jogo_text_view" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider_distancia"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="15dp"
+        android:padding="20dp"
         android:stepSize="1.0"
         android:value="10.0"
         android:valueFrom="0.0"
         android:valueTo="100.0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tipos_jogos"
         app:layout_constraintTop_toBottomOf="@id/tipos_jogos" />
 
     <TextView
@@ -37,13 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dis_text"
-        android:textSize="15sp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="10dp"
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/slider_distancia"
-        app:layout_constraintEnd_toStartOf="@+id/slider_distancia"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tipos_jogos"
         app:layout_constraintTop_toTopOf="@+id/slider_distancia" />
 
     <TextView
@@ -69,57 +63,63 @@
 
     <TextView
         android:id="@+id/explorar_data_de"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="center"
+        android:padding="20dp"
         android:text="@string/explorar_date_de_text_default"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dist_text_view" />
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/explorar_data_ate"
+        app:layout_constraintStart_toStartOf="@+id/dist_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/slider_distancia" />
 
     <TextView
         android:id="@+id/explorar_data_ate"
-        android:layout_width="wrap_content"
+        android:layout_width="183dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="20dp"
+        android:gravity="center"
         android:text="@string/explorar_date_ate_text_default"
         android:textColor="@color/black"
-        android:layout_marginEnd="50dp"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/explorar_data_de" />
+        app:layout_constraintEnd_toEndOf="@+id/slider_distancia"
+        app:layout_constraintTop_toBottomOf="@+id/slider_distancia" />
 
     <TextView
         android:id="@+id/explorar_time_de"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="20dp"
         android:text="@string/explorar_hora_de_text_default"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/explorar_time_Ate"
         app:layout_constraintStart_toStartOf="@+id/explorar_data_de"
         app:layout_constraintTop_toBottomOf="@+id/explorar_data_de" />
 
     <TextView
         android:id="@+id/explorar_time_Ate"
-        android:layout_width="wrap_content"
+        android:layout_width="183dp"
         android:layout_height="wrap_content"
         android:text="@string/explorar_hora_ate_text_default"
+        android:gravity="center"
+        android:padding="20dp"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="@+id/explorar_data_ate"
         app:layout_constraintTop_toBottomOf="@+id/explorar_data_ate" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/explorar_filtrar_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
         android:text="@string/explorar_filtrar_button_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/explorar_time_Ate"
         app:layout_constraintTop_toBottomOf="@+id/explorar_time_Ate" />
 
     <TextView
@@ -129,6 +129,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:text="@string/explorar_novo_jogo_text_view_text"
+        android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
