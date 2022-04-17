@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.navOptions
 import br.edu.ufabc.isports.databinding.FragmentCadastroBinding
 
 
@@ -40,7 +41,11 @@ class CadastroFragment : Fragment() {
 
     private fun bindEvents() {
         binding.cadastroButton.setOnClickListener {
-            findNavController().navigate(R.id.action_cadastroFragment_to_meusJogosFragment)
+            findNavController().navigate(CadastroFragmentDirections.actionCadastroFragmentToMeusJogosFragment(), navOptions {
+                popUpTo(findNavController().graph.startDestinationId){
+                    inclusive=true
+                }
+            })
         }
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import br.edu.ufabc.isports.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(){
@@ -29,7 +30,11 @@ class LoginFragment : Fragment(){
 
     private fun bindEvents() {
         binding.loginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_meusJogosFragment)
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
+                popUpTo(findNavController().graph.startDestinationId){
+                    inclusive=true
+                }
+            })
         }
         binding.cadastroTextView.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_cadastroFragment)
