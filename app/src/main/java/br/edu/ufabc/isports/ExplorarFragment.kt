@@ -3,19 +3,103 @@ package br.edu.ufabc.isports
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
+import br.edu.ufabc.isports.databinding.JogosListItemBinding
+import br.edu.ufabc.isports.model.Jogos
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ExplorarFragment : Fragment() {
     private lateinit var binding: FragmentExplorarBinding
+    private val viewModel: MainViewModel by activityViewModels()
+
+    private inner class ContactAdapter(val contacts: List<Jogos>) :
+        RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
+
+
+        private inner class ContactHolder(itemBinding: JogosListItemBinding) :
+            RecyclerView.ViewHolder(itemBinding.root) {
+
+            val modalidade = itemBinding.jogosListModalidade
+            val dateCreated = itemBinding.jogosListDataDia
+            val time = itemBinding.jogosListTime
+            val endereco = itemBinding.jogosListEndereco
+            val icon = itemBinding.notesListFavorites
+            init {
+                itemBinding.root.setOnClickListener {
+                    viewModel.clickedItemId.value = getItemId(bindingAdapterPosition)
+                }
+            }
+        }
+
+        /**
+         * Create a view holder.
+         */
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+        ): ContactHolder =
+            ContactHolder(
+                JogosListItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        fun setIcon(icon:String):Int
+        {
+            if(icon=="Basquete")
+            {
+                return R.drawable.ic_baseline_sports_basketball
+            } else if(icon=="Tenis")
+            {
+                return R.drawable.ic_baseline_sports_tennis
+            } else if (icon=="Vôlei"){
+                return R.drawable.ic_baseline_sports_volleyball
+            }
+            return R.drawable.ic_baseline_sports_soccer
+        }
+        /**
+         * Populate a view holder with data.
+         */
+        override fun onBindViewHolder(holder: ContactHolder, position: Int) {
+            val contact = contacts[position]
+
+            holder.modalidade.text = contact.modalidade
+            holder.dateCreated.text = contact.dateCreated
+            holder.time.text = contact.timeStart
+            holder.endereco.text = contact.endereco
+            holder.icon.setImageResource(setIcon(contact.modalidade))
+        }
+
+        /**
+         * The total quantity of items in the list.
+         */
+        override fun getItemCount(): Int = contacts.size
+
+        override fun getItemId(position: Int): Long = contacts[position].id
+
+        /**
+         * Called when a view holder is recycled.
+         */
+        override fun onViewRecycled(holder: ContactHolder) {
+            super.onViewRecycled(holder)
+            Log.d("APP", "Recycled holder at position ${holder.bindingAdapterPosition}")
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,7 +176,11 @@ class ExplorarFragment : Fragment() {
             true
         }
         binding.explorarFiltrarButton.setOnClickListener {
-            binding.explorarMatchNotFoundTextView.visibility = View.VISIBLE
+            activity?.let {
+                binding.recyclerviewJogos.apply {
+                    adapter = ContactAdapter(viewModel.allContacts())
+                }
+            }
         }
         binding.explorarNovoJogoTextView.setOnClickListener {
             findNavController().navigate(R.id.action_explorarFragment_to_novoJogoFragment)

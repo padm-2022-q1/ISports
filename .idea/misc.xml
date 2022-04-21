@@ -15,6 +15,9 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/padm/ISports/app/src/main/res/layout/fragment_perfil.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/padm/ISports/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/dev/ISports/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1155" />
+        <entry key="..\:/Users/dev/ISports/app/src/main/res/drawable/customborder.xml" value="0.127" />
+        <entry key="..\:/Users/dev/ISports/app/src/main/res/drawable/ic_baseline_sports_tennis.xml" value="0.127" />
+        <entry key="..\:/Users/dev/ISports/app/src/main/res/drawable/ic_baseline_sports_volleyball.xml" value="0.127" />
         <entry key="..\:/Users/dev/ISports/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1155" />
         <entry key="..\:/Users/dev/ISports/app/src/main/res/drawable/images.xml" value="0.1155" />
         <entry key="..\:/Users/dev/ISports/app/src/main/res/drawable/logotipo_isports_background.xml" value="0.1155" />
@@ -23,6 +26,8 @@
         <entry key="..\:/Users/dev/ISports/app/src/main/res/layout/fragment_explorar.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/dev/ISports/app/src/main/res/layout/fragment_login.xml" value="0.152" />
         <entry key="..\:/Users/dev/ISports/app/src/main/res/layout/fragment_meus_jogos.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/dev/ISports/app/src/main/res/layout/fragment_novo_jogo.xml" value="0.23794871794871794" />
+        <entry key="..\:/Users/dev/ISports/app/src/main/res/layout/jogos_list_item.xml" value="0.264" />
         <entry key="..\:/Users/dev/ISports/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/dev/ISports/app/src/main/res/mipmap-anydpi-v26/logotipo_isports_round.xml" value="0.1155" />
       </map>

@@ -32,7 +32,7 @@
         <item>Futsal</item>
         <item>Futebol</item>
         <item>Tenis</item>
-        <item>Ping-Pong</item>
+        <item>Vôlei</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="username_text">Username</string>
@@ -43,4 +43,9 @@
     <string name="novo_jogo_button_text">Novo Jogo</string>
     <string name="alterar_cadastro_text">Alterar cadastro</string>
     <string name="novo_jogo_text_view">Novo Jogo</string>
+    <string name="modalidade">Modalidade</string>
+    <string name="data_dia">data_dia</string>
+    <string name="time_jogo">time_jogo</string>
+    <string name="endereco_jogo">endereco_jogo</string>
+    <string name="modalidade_icone">modalidade_icone</string>
 </resources>

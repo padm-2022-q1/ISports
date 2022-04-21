@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "modalidade": "Basquete",
+    "dateCreated": "20/04/2022",
+    "timeStart": "12:00",
+    "timeEnd": "15:00",
+    "endereco": "R. Visc. de Mauá, 494, Santo André - SP"
+  },
+  {
+    "id": 1,
+    "modalidade": "Futebol",
+    "dateCreated": "21/04/2022",
+    "timeStart": "15:00",
+    "timeEnd": "18:00",
+    "endereco": "R. James Stolz, 94, São Paulo"
+  },
+  {
+    "id": 2,
+    "modalidade": "Futsal",
+    "dateCreated": "22/04/2022",
+    "timeStart": "17:00",
+    "timeEnd": "20:00",
+    "endereco": "Rua Alonso Vasconcelos Pacheco,441, Mauá"
+  },
+  {
+    "id": 3,
+    "modalidade": "Tenis",
+    "dateCreated": "22/04/2022",
+    "timeStart": "15:00",
+    "timeEnd": "17:00",
+    "endereco": "R. Cel. Fernando Prestes,353, Santo André"
+  },
+  {
+    "id": 4,
+    "modalidade": "Vôlei",
+    "dateCreated": "25/04/2022",
+    "timeStart": "19:00",
+    "timeEnd": "00:00",
+    "endereco": "R. Cel. Fernando Prestes,353, Santo André"
+  }
+]
