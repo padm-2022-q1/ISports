@@ -1,6 +1,7 @@
 package br.edu.ufabc.isports
+
+import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navOptions
 import br.edu.ufabc.isports.databinding.FragmentCadastroBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 
 class CadastroFragment : Fragment() {
@@ -41,11 +44,32 @@ class CadastroFragment : Fragment() {
 
     private fun bindEvents() {
         binding.cadastroButton.setOnClickListener {
-            findNavController().navigate(CadastroFragmentDirections.actionCadastroFragmentToMeusJogosFragment(), navOptions {
-                popUpTo(findNavController().graph.startDestinationId){
-                    inclusive=true
+            val email = binding.cadastroEmailEditText.text.toString()
+            val username = binding.cadastroUsernameEditText.text.toString()
+            val password = binding.cadastroPasswordEditText.text.toString()
+            val confirmPassword = binding.cadastroConfirmPasswordEditText.text.toString()
+
+            if(email.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
+                Snackbar.make(it, "Preencha todos os campos", Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(Color.GRAY)
+                    .setTextColor(Color.BLACK)
+                    .show()
+            } else if(password != confirmPassword){
+                Snackbar.make(it, "As senhas não batem", Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(Color.GRAY)
+                    .setTextColor(Color.BLACK)
+                    .show()
+            } else{
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        findNavController().navigate(CadastroFragmentDirections.actionCadastroFragmentToMeusJogosFragment(), navOptions {
+                            popUpTo(findNavController().graph.startDestinationId){
+                                inclusive=true
+                            }
+                        })
+                    }
                 }
-            })
+            }
         }
     }
 }
