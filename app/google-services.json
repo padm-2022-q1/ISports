@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "625730151317",
+    "project_id": "isports-84e14",
+    "storage_bucket": "isports-84e14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625730151317:android:52f334c4873b0d3f940c9c",
+        "android_client_info": {
+          "package_name": "br.edu.ufabc.isports"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625730151317-dem9le517k22isqpio0rsgdsgl7rthlu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8mkXwa2IBl6u6a-at6du_l1vUge69U-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625730151317-dem9le517k22isqpio0rsgdsgl7rthlu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
