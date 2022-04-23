@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class CadastroFragment : Fragment() {
@@ -65,6 +66,9 @@ class CadastroFragment : Fragment() {
             } else{
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if(task.isSuccessful){
+                        FirebaseFirestore.getInstance().collection("Usuarios")
+                            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+                            .set(mapOf("username" to username))
                         findNavController().navigate(CadastroFragmentDirections.actionCadastroFragmentToMeusJogosFragment(), navOptions {
                             popUpTo(findNavController().graph.startDestinationId){
                                 inclusive=true
