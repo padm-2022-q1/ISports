@@ -12,6 +12,9 @@ import androidx.navigation.navOptions
 import br.edu.ufabc.isports.databinding.FragmentCadastroBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 
 
 class CadastroFragment : Fragment() {
@@ -43,19 +46,19 @@ class CadastroFragment : Fragment() {
     }
 
     private fun bindEvents() {
-        binding.cadastroButton.setOnClickListener {
+        binding.cadastroButton.setOnClickListener { view ->
             val email = binding.cadastroEmailEditText.text.toString()
             val username = binding.cadastroUsernameEditText.text.toString()
             val password = binding.cadastroPasswordEditText.text.toString()
             val confirmPassword = binding.cadastroConfirmPasswordEditText.text.toString()
 
             if(email.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
-                Snackbar.make(it, "Preencha todos os campos", Snackbar.LENGTH_SHORT)
+                Snackbar.make(view, "Preencha todos os campos", Snackbar.LENGTH_SHORT)
                     .setBackgroundTint(Color.GRAY)
                     .setTextColor(Color.BLACK)
                     .show()
             } else if(password != confirmPassword){
-                Snackbar.make(it, "As senhas não batem", Snackbar.LENGTH_SHORT)
+                Snackbar.make(view, "As senhas não batem", Snackbar.LENGTH_SHORT)
                     .setBackgroundTint(Color.GRAY)
                     .setTextColor(Color.BLACK)
                     .show()
@@ -67,6 +70,17 @@ class CadastroFragment : Fragment() {
                                 inclusive=true
                             }
                         })
+                    } else{
+                        val erro = when(task.exception!!){
+                            is FirebaseAuthWeakPasswordException -> "Digite uma senha com no minimo 6 caracteres"
+                            is FirebaseAuthUserCollisionException -> "Esta conta já foi cadastrada"
+                            is FirebaseAuthInvalidCredentialsException -> "E-mail inválido"
+                            else -> "Erro ao cadastrar usuário"
+                        }
+                        Snackbar.make(view, erro, Snackbar.LENGTH_SHORT)
+                            .setBackgroundTint(Color.GRAY)
+                            .setTextColor(Color.BLACK)
+                            .show()
                     }
                 }
             }
