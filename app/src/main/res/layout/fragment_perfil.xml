@@ -20,11 +20,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/perfil_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
-        android:text="@string/username_text"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/app_logo_cadastro"
         app:layout_constraintTop_toTopOf="@+id/app_logo_cadastro" />
