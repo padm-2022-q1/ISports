@@ -2,6 +2,7 @@ package br.edu.ufabc.isports
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import br.edu.ufabc.isports.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.*
 
 class LoginFragment : Fragment(){
     private lateinit var  binding: FragmentLoginBinding
@@ -59,7 +60,18 @@ class LoginFragment : Fragment(){
                                 }
                             })
                         } else{
-                            Snackbar.make(view, "Erro no login", Snackbar.LENGTH_SHORT)
+                            val erro = when(task.exception!!){
+                                is FirebaseAuthInvalidCredentialsException -> {
+                                    when(task.exception!!.message.toString().trim()){
+                                        "The email address is badly formatted." -> "Endereço de email está mal formatado"
+                                        "The password is invalid or the user does not have a password." -> "Senha incorreta"
+                                        else -> "Erro ao autenticar usuário"
+                                    }
+                                }
+                                is FirebaseAuthInvalidUserException -> "Usuário não encontrado"
+                                else -> "Erro ao cadastrar usuário"
+                            }
+                            Snackbar.make(view, erro, Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
