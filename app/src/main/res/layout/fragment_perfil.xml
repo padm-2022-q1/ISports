@@ -23,11 +23,21 @@
         android:id="@+id/perfil_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/app_logo_cadastro"
         app:layout_constraintTop_toTopOf="@+id/app_logo_cadastro" />
+
+    <TextView
+        android:id="@+id/perfil_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/app_logo_cadastro"
+        app:layout_constraintStart_toEndOf="@+id/app_logo_cadastro" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/alterar_cadastro_Button"
@@ -37,7 +47,7 @@
         android:layout_margin="15dp"
         android:padding="20dp"
         android:backgroundTint="@color/grey_tint_50"
-        android:text="@string/alterar_cadastro_text"
+        android:text="@string/redefinir_senha_text"
         android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"

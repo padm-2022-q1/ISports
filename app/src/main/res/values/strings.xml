@@ -34,14 +34,13 @@
         <item>Tenis</item>
         <item>Vôlei</item>
     </string-array>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="username_text">Username</string>
     <string name="signup_address_hint">Endereço</string>
     <string name="log_out_text">Log Out</string>
     <string name="data_text">Data</string>
     <string name="hour_text">Hora</string>
     <string name="novo_jogo_button_text">Novo Jogo</string>
-    <string name="alterar_cadastro_text">Alterar cadastro</string>
+    <string name="redefinir_senha_text">Redefinir Senha</string>
     <string name="novo_jogo_text_view">Novo Jogo</string>
     <string name="modalidade">Modalidade</string>
     <string name="data_dia">data_dia</string>
@@ -53,4 +52,5 @@
     <string name="fab_historic_text">HISTORICO</string>
     <string name="fab_historic_text_historico">Próximos</string>
     <string name="fab_add_jogo_description">Novo jogo</string>
+    <string name="resetar_senha_button_text">Trocar a senha</string>
 </resources>

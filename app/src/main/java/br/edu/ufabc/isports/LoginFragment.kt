@@ -2,7 +2,6 @@ package br.edu.ufabc.isports
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import br.edu.ufabc.isports.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.*
 
 class LoginFragment : Fragment(){
@@ -69,6 +69,7 @@ class LoginFragment : Fragment(){
                                     }
                                 }
                                 is FirebaseAuthInvalidUserException -> "Usuário não encontrado"
+                                is FirebaseNetworkException -> "Falha na comunicação com o servidor, tente novamente mais tarde"
                                 else -> "Erro ao cadastrar usuário"
                             }
                             Snackbar.make(view, erro, Snackbar.LENGTH_SHORT)
