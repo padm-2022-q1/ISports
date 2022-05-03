@@ -178,7 +178,7 @@ class ExplorarFragment : Fragment() {
                 }
             }
         }
-        binding.explorarNovoJogoTextView.setOnClickListener {
+        binding.fabAddJogo.setOnClickListener {
             findNavController().navigate(R.id.action_explorarFragment_to_novoJogoFragment)
         }
     }

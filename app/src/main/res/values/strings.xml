@@ -52,4 +52,5 @@
     <string name="fab_historic_description">Visualizando historico de jogos</string>
     <string name="fab_historic_text">HISTORICO</string>
     <string name="fab_historic_text_historico">Próximos</string>
+    <string name="fab_add_jogo_description">Novo jogo</string>
 </resources>
