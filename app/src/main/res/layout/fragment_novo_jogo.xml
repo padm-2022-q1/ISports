@@ -7,23 +7,6 @@
     android:background="@color/black_tint_30"
     tools:context=".NovoJogoFragment">
 
-    <TextView
-        android:id="@+id/novo_jogo_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:textColor="@color/black"
-        android:text="@string/novo_jogo_text_view"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Spinner
         android:id="@+id/tipos_jogos"
         android:layout_width="match_parent"
@@ -33,7 +16,7 @@
         android:background="@color/grey_tint_50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/novo_jogo_text_view" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/new_game_data_de"
@@ -90,20 +73,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_game_time_Ate" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/new_game_Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:padding="20dp"
-        android:backgroundTint="@color/grey_tint_50"
-        android:text="@string/novo_jogo_button_text"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cadastro_endereço_edit_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

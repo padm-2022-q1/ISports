@@ -55,4 +55,6 @@
     <string name="resetar_senha_button_text">Trocar a senha</string>
     <string name="login_esqueci_senha_label">Esqueci a senha</string>
     <string name="redefinir_senha_button_label">Redefinir senha</string>
+    <string name="action_save_description">Salvar novo jogo</string>
+    <string name="action_save_title">Novo jogo</string>
 </resources>
