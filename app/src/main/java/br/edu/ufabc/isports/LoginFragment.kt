@@ -83,5 +83,8 @@ class LoginFragment : Fragment(){
         binding.cadastroTextView.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_cadastroFragment)
         }
+        binding.esqueciSenhaTextView.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_recuperarSenhaFragment)
+        }
     }
 }

@@ -53,4 +53,6 @@
     <string name="fab_historic_text_historico">Próximos</string>
     <string name="fab_add_jogo_description">Novo jogo</string>
     <string name="resetar_senha_button_text">Trocar a senha</string>
+    <string name="login_esqueci_senha_label">Esqueci a senha</string>
+    <string name="redefinir_senha_button_label">Redefinir senha</string>
 </resources>
