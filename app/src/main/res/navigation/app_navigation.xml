@@ -55,13 +55,9 @@
         <action
             android:id="@+id/action_meusJogosFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
-        <argument
-            android:name="isHistorico"
-            app:argType="boolean"
-            android:defaultValue="false" />
         <action
-            android:id="@+id/action_meusJogosFragment_self"
-            app:destination="@id/meusJogosFragment" />
+            android:id="@+id/action_meusJogosFragment_to_historicoFragment"
+            app:destination="@id/historicoFragment" />
     </fragment>
     <fragment
         android:id="@+id/perfilFragment"
@@ -89,5 +85,19 @@
         <action
             android:id="@+id/action_novoJogoFragment_to_explorarFragment"
             app:destination="@id/explorarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historicoFragment"
+        android:name="br.edu.ufabc.isports.HistoricoFragment"
+        android:label="HistoricoFragment" >
+        <action
+            android:id="@+id/action_historicoFragment_to_meusJogosFragment"
+            app:destination="@id/meusJogosFragment" />
+        <action
+            android:id="@+id/action_historicoFragment_to_explorarFragment"
+            app:destination="@id/explorarFragment" />
+        <action
+            android:id="@+id/action_historicoFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
     </fragment>
 </navigation>

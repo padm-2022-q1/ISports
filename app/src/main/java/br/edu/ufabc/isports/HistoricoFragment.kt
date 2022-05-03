@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.isports.databinding.FragmentMeusJogosBinding
 
-class MeusJogosFragment : Fragment() {
+class HistoricoFragment : Fragment() {
     private lateinit var binding: FragmentMeusJogosBinding
 
     override fun onCreateView(
@@ -17,19 +17,21 @@ class MeusJogosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMeusJogosBinding.inflate(inflater, container, false)
+        binding.meusJogosMatchNotFoundTextView.text = getString(R.string.match_not_found_historico)
+        binding.fabHistoric.text = getString(R.string.fab_historic_text_historico)
         bindEvents()
         return binding.root
     }
     private fun bindEvents() {
         binding.bottomNavigationJogos.setOnItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.menu_explorar -> findNavController().navigate(R.id.action_meusJogosFragment_to_explorarFragment)
-                R.id.menu_perfil -> findNavController().navigate(R.id.action_meusJogosFragment_to_perfilFragment)
+                R.id.menu_explorar -> findNavController().navigate(R.id.action_historicoFragment_to_explorarFragment)
+                R.id.menu_perfil -> findNavController().navigate(R.id.action_historicoFragment_to_perfilFragment)
             }
             true
         }
         binding.fabHistoric.setOnClickListener {
-            findNavController().navigate(R.id.action_meusJogosFragment_to_historicoFragment)
+            findNavController().navigate(R.id.action_historicoFragment_to_meusJogosFragment)
         }
     }
 

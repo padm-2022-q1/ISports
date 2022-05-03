@@ -12,8 +12,6 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
@@ -107,7 +105,6 @@ class ExplorarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentExplorarBinding.inflate(inflater, container, false)
-        binding.bottomNavigationExplorar.selectedItemId = R.id.menu_explorar
         bindEvents()
         createSpinner()
         createDate()
@@ -170,7 +167,6 @@ class ExplorarFragment : Fragment() {
         binding.bottomNavigationExplorar.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.menu_meus_jogos -> findNavController().navigate(R.id.action_explorarFragment_to_meusJogosFragment)
-                R.id.menu_historico -> findNavController().navigate(ExplorarFragmentDirections.actionExplorarFragmentToMeusJogosFragment(isHistorico = true))
                 R.id.menu_perfil -> findNavController().navigate(R.id.action_explorarFragment_to_perfilFragment)
             }
             true

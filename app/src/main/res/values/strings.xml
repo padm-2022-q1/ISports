@@ -49,4 +49,7 @@
     <string name="endereco_jogo">endereco_jogo</string>
     <string name="modalidade_icone">modalidade_icone</string>
     <string name="login_email_hint">Email</string>
+    <string name="fab_historic_description">Visualizando historico de jogos</string>
+    <string name="fab_historic_text">HISTORICO</string>
+    <string name="fab_historic_text_historico">Próximos</string>
 </resources>

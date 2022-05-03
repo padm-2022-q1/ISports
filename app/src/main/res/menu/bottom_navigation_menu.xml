@@ -5,11 +5,6 @@
         android:enabled="true"
         android:title="@string/menu_meus_jogos_title"/>
     <item
-        android:icon="@drawable/ic_action_historico"
-        android:id="@+id/menu_historico"
-        android:enabled="true"
-        android:title="@string/menu_historico_title"/>
-    <item
         android:icon="@drawable/ic_action_explorar"
         android:id="@+id/menu_explorar"
         android:enabled="true"
