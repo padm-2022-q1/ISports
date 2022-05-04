@@ -36,12 +36,12 @@ class NovoJogoFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_save -> {
+                val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                 FirebaseFirestore.getInstance().collection("Jogos")
                     .add(hashMapOf(
                         "esporte" to binding.tiposJogos.selectedItem.toString(),
-                        "data" to binding.newGameData.text,
-                        "inicio" to binding.newGameTimeDe.text,
-                        "fim" to binding.newGameTimeAte.text,
+                        "inicio" to sdf.parse("${binding.newGameData.text} ${binding.newGameTimeDe.text}"),
+                        "fim" to sdf.parse("${binding.newGameData.text} ${binding.newGameTimeAte.text}"),
                         "local" to binding.cadastroEndereco.text.toString()
                     ))
                     .addOnSuccessListener {
@@ -71,19 +71,18 @@ class NovoJogoFragment : Fragment() {
     private fun createDate() {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
-        val myCalendarDe = Calendar.getInstance()
-        val datePickerDe = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMouth ->
-            myCalendarDe.set(Calendar.YEAR, year)
-            myCalendarDe.set(Calendar.MONTH, month)
-            myCalendarDe.set(Calendar.DAY_OF_MONTH, dayOfMouth)
-            binding.newGameData.text = sdf.format(myCalendarDe.time)
+        val myCalendar = Calendar.getInstance()
+        val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMouth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, month)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMouth)
+            binding.newGameData.text = sdf.format(myCalendar.time)
         }
 
-
         binding.newGameData.setOnClickListener{
-            DatePickerDialog(it.context, datePickerDe, myCalendarDe.get(Calendar.YEAR), myCalendarDe.get(
+            DatePickerDialog(it.context, datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(
                 Calendar.MONTH),
-                myCalendarDe.get(Calendar.DAY_OF_MONTH)).show()
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show()
         }
     }
 
