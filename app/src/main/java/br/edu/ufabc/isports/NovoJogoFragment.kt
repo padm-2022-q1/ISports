@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.isports.databinding.FragmentNovoJogoBinding
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,7 +36,17 @@ class NovoJogoFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_save -> {
-                findNavController().navigate(R.id.action_novoJogoFragment_to_explorarFragment)
+                FirebaseFirestore.getInstance().collection("Jogos")
+                    .add(hashMapOf(
+                        "esporte" to binding.tiposJogos.selectedItem.toString(),
+                        "data" to binding.newGameData.text,
+                        "inicio" to binding.newGameTimeDe.text,
+                        "fim" to binding.newGameTimeAte.text,
+                        "local" to binding.cadastroEndereco.text.toString()
+                    ))
+                    .addOnSuccessListener {
+                        findNavController().navigate(R.id.action_novoJogoFragment_to_explorarFragment)
+                    }
             }
         }
         return true
@@ -65,11 +76,11 @@ class NovoJogoFragment : Fragment() {
             myCalendarDe.set(Calendar.YEAR, year)
             myCalendarDe.set(Calendar.MONTH, month)
             myCalendarDe.set(Calendar.DAY_OF_MONTH, dayOfMouth)
-            binding.newGameDataDe.text = sdf.format(myCalendarDe.time)
+            binding.newGameData.text = sdf.format(myCalendarDe.time)
         }
 
 
-        binding.newGameDataDe.setOnClickListener{
+        binding.newGameData.setOnClickListener{
             DatePickerDialog(it.context, datePickerDe, myCalendarDe.get(Calendar.YEAR), myCalendarDe.get(
                 Calendar.MONTH),
                 myCalendarDe.get(Calendar.DAY_OF_MONTH)).show()

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/new_game_data_de"
+        android:id="@+id/new_game_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -43,7 +43,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/new_game_time_Ate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_game_data_de" />
+        app:layout_constraintTop_toBottomOf="@+id/new_game_data" />
 
     <TextView
         android:id="@+id/new_game_time_Ate"
@@ -55,11 +55,11 @@
         android:gravity="center"
         android:text="@string/explorar_hora_ate_text_default"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/new_game_data_de"
-        app:layout_constraintTop_toBottomOf="@+id/new_game_data_de" />
+        app:layout_constraintEnd_toEndOf="@+id/new_game_data"
+        app:layout_constraintTop_toBottomOf="@+id/new_game_data" />
 
     <EditText
-        android:id="@+id/cadastro_endereço_edit_text"
+        android:id="@+id/cadastro_endereco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
