@@ -39,7 +39,7 @@ class NovoJogoFragment : Fragment() {
                 val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                 FirebaseFirestore.getInstance().collection("Jogos")
                     .add(hashMapOf(
-                        "esporte" to binding.tiposJogos.selectedItem.toString(),
+                        "modalidade" to binding.tiposJogos.selectedItem.toString(),
                         "inicio" to sdf.parse("${binding.newGameData.text} ${binding.newGameTimeDe.text}"),
                         "fim" to sdf.parse("${binding.newGameData.text} ${binding.newGameTimeAte.text}"),
                         "local" to binding.cadastroEndereco.text.toString()

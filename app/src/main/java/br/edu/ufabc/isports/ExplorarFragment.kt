@@ -15,7 +15,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
+import br.edu.ufabc.isports.model.JogoFirestore
 import br.edu.ufabc.isports.model.Jogos
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -58,16 +61,18 @@ class ExplorarFragment : Fragment() {
             )
         fun setIcon(icon:String):Int
         {
-            if(icon=="Basquete")
-            {
-                return R.drawable.ic_baseline_sports_basketball
-            } else if(icon=="Tenis")
-            {
-                return R.drawable.ic_baseline_sports_tennis
-            } else if (icon=="Vôlei"){
-                return R.drawable.ic_baseline_sports_volleyball
+            return when (icon) {
+                "Basquete" -> {
+                    R.drawable.ic_baseline_sports_basketball
+                }
+                "Tenis" -> {
+                    R.drawable.ic_baseline_sports_tennis
+                }
+                "Vôlei" -> {
+                    R.drawable.ic_baseline_sports_volleyball
+                }
+                else -> R.drawable.ic_baseline_sports_soccer
             }
-            return R.drawable.ic_baseline_sports_soccer
         }
         /**
          * Populate a view holder with data.
@@ -172,11 +177,24 @@ class ExplorarFragment : Fragment() {
             true
         }
         binding.explorarFiltrarButton.setOnClickListener {
-            activity?.let {
+            val list: MutableList<JogoFirestore> = mutableListOf()
+            FirebaseFirestore.getInstance().collection("Jogos")
+                .whereEqualTo("modalidade", binding.tiposJogos.selectedItem.toString())
+                .get().addOnSuccessListener { documents ->
+                    for(document in documents){
+                        list.add(JogoFirestore(
+                            document.id,
+                            document.data["modalidade"].toString(),
+                            (document.data["inicio"] as Timestamp).toDate(),
+                            (document.data["fim"] as Timestamp).toDate(),
+                            document.data["local"].toString()))
+                    }
+                }
+            /*activity?.let {
                 binding.recyclerviewJogos.apply {
                     adapter = ContactAdapter(viewModel.allContacts())
                 }
-            }
+            }*/
         }
         binding.fabAddJogo.setOnClickListener {
             findNavController().navigate(R.id.action_explorarFragment_to_novoJogoFragment)
