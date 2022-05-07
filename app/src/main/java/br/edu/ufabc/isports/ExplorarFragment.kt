@@ -26,7 +26,7 @@ class ExplorarFragment : Fragment() {
     private lateinit var binding: FragmentExplorarBinding
     private val viewModel: MainViewModel by activityViewModels()
 
-    private inner class ContactAdapter(val contacts: List<Jogos>) :
+    private inner class ContactAdapter(val contacts: List<JogoFirestore>) :
         RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
 
 
@@ -81,9 +81,9 @@ class ExplorarFragment : Fragment() {
             val contact = contacts[position]
 
             holder.modalidade.text = contact.modalidade
-            holder.dateCreated.text = contact.dateCreated
-            holder.time.text = contact.timeStart
-            holder.endereco.text = contact.endereco
+            holder.dateCreated.text = contact.inicio.toString()
+            //holder.time.text = contact.timeStart
+            holder.endereco.text = contact.local
             holder.icon.setImageResource(setIcon(contact.modalidade))
         }
 
@@ -92,7 +92,7 @@ class ExplorarFragment : Fragment() {
          */
         override fun getItemCount(): Int = contacts.size
 
-        override fun getItemId(position: Int): Long = contacts[position].id
+        override fun getItemId(position: Int): Long = contacts[position].id.toLong()
 
         /**
          * Called when a view holder is recycled.
@@ -189,7 +189,11 @@ class ExplorarFragment : Fragment() {
                             (document.data["fim"] as Timestamp).toDate(),
                             document.data["local"].toString()))
                     }
+                    binding.recyclerviewJogos.apply {
+                        adapter = ContactAdapter(list.toList())
+                    }
                 }
+
             /*activity?.let {
                 binding.recyclerviewJogos.apply {
                     adapter = ContactAdapter(viewModel.allContacts())
