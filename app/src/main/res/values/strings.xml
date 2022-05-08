@@ -2,6 +2,7 @@
     <string name="app_name">ISports</string>
     <string name="main_fragment_default">Main Fragment</string>
     <string name="loginButton_Text">Login</string>
+    <string name="todo">To-Do</string>
     <string name="cadastro_fragment_default">Cadastro Fragment</string>
     <string name="explorar_fragment_default">Explorar Fragment</string>
     <string name="meus_jogos_fragment_default">Meus jogos Fragment</string>

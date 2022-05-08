@@ -8,26 +8,33 @@
     tools:context=".ExplorarFragment">
 
     <Spinner
-        android:background="@color/grey_tint_50"
         android:id="@+id/tipos_jogos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:padding="20dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/grey_tint_50"
+        android:contentDescription="@string/todo"
+        android:minHeight="48dp"
+        android:padding="20dp"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider_distancia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
         android:layout_below="@id/tipos_jogos"
         android:layout_centerVertical="@id/dist_text_view"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
         android:layout_toEndOf="@+id/dist_text_view"
         android:background="@color/grey_tint_50"
+        android:contentDescription="@string/todo"
         android:padding="20dp"
         android:stepSize="1.0"
         android:value="10.0"
@@ -40,10 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tipos_jogos"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="25dp"
         android:text="@string/dis_text"
-        android:textColor="@color/black"
+        android:textColor="#81D4FA"
         android:textSize="15sp" />
 
     <TextView
@@ -67,17 +74,18 @@
 
     <TextView
         android:id="@+id/explorar_data_de"
-        android:layout_width="183dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/slider_distancia"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:gravity="center"
+        android:layout_toStartOf="@id/explorar_data_ate"
         android:background="@color/grey_tint_50"
+        android:gravity="center"
         android:padding="20dp"
         android:text="@string/explorar_date_de_text_default"
-        android:textColor="@color/black"
-       android:layout_below="@id/slider_distancia" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/explorar_data_ate"
@@ -96,19 +104,19 @@
         android:id="@+id/explorar_time_de"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/explorar_data_ate"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
+        android:layout_toStartOf="@id/explorar_time_Ate"
         android:background="@color/grey_tint_50"
+        android:gravity="center"
         android:padding="20dp"
         android:text="@string/explorar_hora_de_text_default"
         android:textColor="@color/black"
-        android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/explorar_time_Ate"
         app:layout_constraintStart_toStartOf="@+id/explorar_data_de"
-        app:layout_constraintTop_toBottomOf="@+id/explorar_data_de"
-        android:layout_below="@id/explorar_data_ate"
-        android:layout_alignParentStart="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/explorar_data_de" />
 
     <TextView
         android:id="@+id/explorar_time_Ate"
@@ -124,15 +132,16 @@
         android:textColor="@color/black" />
 
     <com.google.android.material.button.MaterialButton
-        android:backgroundTint="@color/grey_tint_50"
         android:id="@+id/explorar_filtrar_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/black"
-        android:text="@string/explorar_filtrar_button_text"
         android:layout_below="@id/explorar_time_Ate"
-        android:layout_alignEnd="@id/explorar_time_Ate"/>
+        android:layout_alignEnd="@id/explorar_time_Ate"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/grey_tint_50"
+        android:text="@string/explorar_filtrar_button_text"
+        android:textColor="#263238"
+        tools:ignore="TextContrastCheck" />
 
     <ScrollView
         android:layout_width="match_parent"
