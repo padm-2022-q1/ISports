@@ -57,4 +57,5 @@
     <string name="redefinir_senha_button_label">Redefinir senha</string>
     <string name="action_save_description">Salvar novo jogo</string>
     <string name="action_save_title">Novo jogo</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

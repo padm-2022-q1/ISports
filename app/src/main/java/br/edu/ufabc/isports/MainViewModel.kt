@@ -8,7 +8,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = (application as App).repository
 
     val clickedItemId by lazy {
-        MutableLiveData<Long?>()
+        MutableLiveData<String?>()
     }
 
     fun allContacts() = repository.getAll()

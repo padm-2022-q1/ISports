@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_explorarFragment_to_novoJogoFragment"
             app:destination="@id/novoJogoFragment" />
+        <action
+            android:id="@+id/onClickItem"
+            app:destination="@id/jogosDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/meusJogosFragment"
@@ -103,5 +106,15 @@
         <action
             android:id="@+id/action_recuperarSenhaFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jogosDetailsFragment"
+        android:name="br.edu.ufabc.isports.JogosDetailsFragment"
+        android:label="fragment_jogos_details"
+        tools:layout="@layout/fragment_jogos_details" >
+        <argument
+            android:name="jogoItem"
+            app:argType="br.edu.ufabc.isports.model.JogoFirestore"
+            app:nullable="true" />
     </fragment>
 </navigation>

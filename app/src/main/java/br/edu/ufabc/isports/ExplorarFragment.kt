@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
 import br.edu.ufabc.isports.model.JogoFirestore
-import br.edu.ufabc.isports.model.Jogos
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -25,7 +24,9 @@ import java.util.*
 class ExplorarFragment : Fragment() {
     private lateinit var binding: FragmentExplorarBinding
     private val viewModel: MainViewModel by activityViewModels()
-
+    companion object{
+        lateinit var list: MutableList<JogoFirestore>
+    }
     private inner class ContactAdapter(val contacts: List<JogoFirestore>) :
         RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
 
@@ -40,8 +41,9 @@ class ExplorarFragment : Fragment() {
             val icon = itemBinding.notesListFavorites
             init {
                 itemBinding.root.setOnClickListener {
-                    viewModel.clickedItemId.value = getItemId(bindingAdapterPosition)
+                    viewModel.clickedItemId.value = getItemFireIdBase(bindingAdapterPosition)
                 }
+
             }
         }
 
@@ -92,7 +94,9 @@ class ExplorarFragment : Fragment() {
          */
         override fun getItemCount(): Int = contacts.size
 
-        override fun getItemId(position: Int): Long = contacts[position].id.toLong()
+        fun getItemFireIdBase(position: Int): String = contacts[position].id
+
+
 
         /**
          * Called when a view holder is recycled.
@@ -169,6 +173,14 @@ class ExplorarFragment : Fragment() {
 
     private fun bindEvents()
     {
+        viewModel.clickedItemId.observe(viewLifecycleOwner){
+            val gameItem=list.toList().find {
+                it.id==viewModel.clickedItemId.value
+            }
+            if(gameItem!=null){
+                findNavController().navigate(ExplorarFragmentDirections.onClickItem(gameItem))
+            }
+        }
         binding.bottomNavigationExplorar.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.menu_meus_jogos -> findNavController().navigate(R.id.action_explorarFragment_to_meusJogosFragment)
@@ -177,7 +189,8 @@ class ExplorarFragment : Fragment() {
             true
         }
         binding.explorarFiltrarButton.setOnClickListener {
-            val list: MutableList<JogoFirestore> = mutableListOf()
+
+            list = mutableListOf()
             FirebaseFirestore.getInstance().collection("Jogos")
                 .whereEqualTo("modalidade", binding.tiposJogos.selectedItem.toString())
                 .get().addOnSuccessListener { documents ->
@@ -193,13 +206,8 @@ class ExplorarFragment : Fragment() {
                         adapter = ContactAdapter(list.toList())
                     }
                 }
-
-            /*activity?.let {
-                binding.recyclerviewJogos.apply {
-                    adapter = ContactAdapter(viewModel.allContacts())
-                }
-            }*/
         }
+
         binding.fabAddJogo.setOnClickListener {
             findNavController().navigate(R.id.action_explorarFragment_to_novoJogoFragment)
         }
