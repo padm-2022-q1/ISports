@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,34 +14,37 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"/>
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider_distancia"
-        android:layout_width="210dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/grey_tint_50"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/tipos_jogos"
+        android:layout_centerVertical="@id/dist_text_view"
         android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/dist_text_view"
+        android:background="@color/grey_tint_50"
         android:padding="20dp"
         android:stepSize="1.0"
         android:value="10.0"
         android:valueFrom="0.0"
-        android:valueTo="100.0"
-        app:layout_constraintEnd_toEndOf="@+id/tipos_jogos"
-        app:layout_constraintTop_toBottomOf="@id/tipos_jogos" />
+        android:valueTo="100.0" />
 
     <TextView
         android:id="@+id/dist_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tipos_jogos"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="25dp"
         android:text="@string/dis_text"
         android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/slider_distancia"
-        app:layout_constraintStart_toStartOf="@+id/tipos_jogos"
-        app:layout_constraintTop_toTopOf="@+id/slider_distancia" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/explorar_match_not_found_textView"
@@ -60,24 +63,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_alignParentBottom="true"/>
 
     <TextView
         android:id="@+id/explorar_data_de"
-        android:layout_width="0dp"
+        android:layout_width="183dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         android:gravity="center"
         android:background="@color/grey_tint_50"
         android:padding="20dp"
         android:text="@string/explorar_date_de_text_default"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/explorar_data_ate"
-        app:layout_constraintStart_toStartOf="@+id/dist_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/slider_distancia" />
+       android:layout_below="@id/slider_distancia" />
 
     <TextView
         android:id="@+id/explorar_data_ate"
@@ -89,15 +89,16 @@
         android:gravity="center"
         android:text="@string/explorar_date_ate_text_default"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/slider_distancia"
-        app:layout_constraintTop_toBottomOf="@+id/slider_distancia" />
+        android:layout_below="@id/slider_distancia"
+        android:layout_alignEnd="@id/slider_distancia"/>
 
     <TextView
         android:id="@+id/explorar_time_de"
-        android:layout_width="0dp"
+        android:layout_width="183dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         android:background="@color/grey_tint_50"
         android:padding="20dp"
         android:text="@string/explorar_hora_de_text_default"
@@ -105,20 +106,22 @@
         android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/explorar_time_Ate"
         app:layout_constraintStart_toStartOf="@+id/explorar_data_de"
-        app:layout_constraintTop_toBottomOf="@+id/explorar_data_de" />
+        app:layout_constraintTop_toBottomOf="@+id/explorar_data_de"
+        android:layout_below="@id/explorar_data_ate"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/explorar_time_Ate"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
-        android:text="@string/explorar_hora_ate_text_default"
+        android:layout_below="@id/explorar_data_ate"
+        android:layout_alignEnd="@id/slider_distancia"
+        android:layout_marginTop="15dp"
         android:background="@color/grey_tint_50"
         android:gravity="center"
         android:padding="20dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/explorar_data_ate"
-        app:layout_constraintTop_toBottomOf="@+id/explorar_data_ate" />
+        android:text="@string/explorar_hora_ate_text_default"
+        android:textColor="@color/black" />
 
     <com.google.android.material.button.MaterialButton
         android:backgroundTint="@color/grey_tint_50"
@@ -128,15 +131,15 @@
         android:layout_marginTop="15dp"
         android:textColor="@color/black"
         android:text="@string/explorar_filtrar_button_text"
-        app:layout_constraintEnd_toEndOf="@+id/explorar_time_Ate"
-        app:layout_constraintTop_toBottomOf="@+id/explorar_time_Ate" />
+        android:layout_below="@id/explorar_time_Ate"
+        android:layout_alignEnd="@id/explorar_time_Ate"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/explorar_filtrar_button"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_explorar">
+        android:layout_above="@id/bottom_navigation_explorar"
+        android:layout_below="@id/explorar_filtrar_button">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_jogos"
             android:layout_width="match_parent"
@@ -155,8 +158,8 @@
         android:layout_margin="20dp"
         android:contentDescription="@string/fab_add_jogo_description"
         android:src="@drawable/ic_action_plus"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_explorar"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_above="@id/bottom_navigation_explorar"
+        android:layout_alignParentEnd="true"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
