@@ -26,6 +26,7 @@ class ExplorarFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     companion object{
         lateinit var list: MutableList<JogoFirestore>
+        lateinit var modalidadesJogos: List<String>
     }
     private inner class ContactAdapter(val contacts: List<JogoFirestore>) :
         RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
@@ -114,6 +115,7 @@ class ExplorarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentExplorarBinding.inflate(inflater, container, false)
+        modalidadesJogos= resources.getStringArray(R.array.tipos_jogos).toList()
         bindEvents()
         createSpinner()
         createDate()
@@ -189,10 +191,9 @@ class ExplorarFragment : Fragment() {
             true
         }
         binding.explorarFiltrarButton.setOnClickListener {
-
             list = mutableListOf()
-            FirebaseFirestore.getInstance().collection("Jogos")
-                .whereEqualTo("modalidade", binding.tiposJogos.selectedItem.toString())
+            FirebaseFirestore.getInstance().collection("Jogos").
+            whereIn("modalidade", if (binding.tiposJogos.selectedItem.toString()=="Todos") modalidadesJogos else listOf(binding.tiposJogos.selectedItem.toString()))
                 .get().addOnSuccessListener { documents ->
                     for(document in documents){
                         list.add(JogoFirestore(

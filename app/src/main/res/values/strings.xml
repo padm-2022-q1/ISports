@@ -28,6 +28,7 @@
     <string name="explorar_filtrar_button_text">Filtrar</string>
     <string name="explorar_novo_jogo_text_view_text">+ Novo Jogo</string>
     <string-array name="tipos_jogos">
+        <item>Todos</item>
         <item>Basquete</item>
         <item>Futsal</item>
         <item>Futebol</item>
