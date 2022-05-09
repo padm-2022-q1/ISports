@@ -95,7 +95,7 @@ class ExplorarFragment : Fragment() {
          */
         override fun getItemCount(): Int = contacts.size
 
-        fun getItemFireIdBase(position: Int): String = contacts[position].id
+        fun getItemFireIdBase(position: Int): JogoFirestore = contacts[position]
 
 
 
@@ -176,12 +176,7 @@ class ExplorarFragment : Fragment() {
     private fun bindEvents()
     {
         viewModel.clickedItemId.observe(viewLifecycleOwner){
-            val gameItem=list.toList().find {
-                it.id==viewModel.clickedItemId.value
-            }
-            if(gameItem!=null){
-                findNavController().navigate(ExplorarFragmentDirections.onClickItem(gameItem))
-            }
+            findNavController().navigate(ExplorarFragmentDirections.onClickItem(it))
         }
         binding.bottomNavigationExplorar.setOnItemSelectedListener { item ->
             when(item.itemId) {

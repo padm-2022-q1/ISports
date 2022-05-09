@@ -3,12 +3,13 @@ package br.edu.ufabc.isports
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import br.edu.ufabc.isports.model.JogoFirestore
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = (application as App).repository
 
     val clickedItemId by lazy {
-        MutableLiveData<String?>()
+        MutableLiveData<JogoFirestore>()
     }
 
     fun allContacts() = repository.getAll()
