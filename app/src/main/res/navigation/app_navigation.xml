@@ -114,7 +114,7 @@
         tools:layout="@layout/fragment_jogos_details" >
         <argument
             android:name="jogoItem"
-            app:argType="br.edu.ufabc.isports.model.JogoFirestore"
+            app:argType="br.edu.ufabc.isports.model.Jogo"
             app:nullable="true" />
     </fragment>
 </navigation>

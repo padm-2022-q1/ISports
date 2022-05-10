@@ -7,15 +7,18 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentNovoJogoBinding
-import com.google.firebase.firestore.FirebaseFirestore
+import br.edu.ufabc.isports.model.JogoFirestore
+import br.edu.ufabc.isports.viewModel.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class NovoJogoFragment : Fragment() {
     private lateinit var binding: FragmentNovoJogoBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,16 +41,16 @@ class NovoJogoFragment : Fragment() {
         when (item.itemId) {
             R.id.action_save -> {
                 val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-                FirebaseFirestore.getInstance().collection("Jogos")
-                    .add(hashMapOf(
-                        "modalidade" to binding.tiposJogos.selectedItem.toString(),
-                        "inicio" to sdf.parse("${binding.newGameData.text} ${binding.newGameTimeDe.text}"),
-                        "fim" to sdf.parse("${binding.newGameData.text} ${binding.newGameTimeAte.text}"),
-                        "local" to binding.cadastroEndereco.text.toString()
-                    ))
-                    .addOnSuccessListener {
+                JogoFirestore(
+                    modalidade = binding.tiposJogos.selectedItem.toString(),
+                    inicio = sdf.parse("${binding.newGameData.text} ${binding.newGameTimeDe.text}")!!,
+                    fim = sdf.parse("${binding.newGameData.text} ${binding.newGameTimeAte.text}")!!,
+                    local = binding.cadastroEndereco.text.toString(),
+                ).let { jogo ->
+                    viewModel.addJogo(jogo).observe(viewLifecycleOwner) {
                         findNavController().navigate(R.id.action_novoJogoFragment_to_explorarFragment)
                     }
+                }
             }
         }
         return true

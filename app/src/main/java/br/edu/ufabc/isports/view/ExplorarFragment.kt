@@ -17,7 +17,7 @@ import br.edu.ufabc.isports.viewModel.MainViewModel
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
-import br.edu.ufabc.isports.model.JogoFirestore
+import br.edu.ufabc.isports.model.Jogo
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -27,10 +27,10 @@ class ExplorarFragment : Fragment() {
     private lateinit var binding: FragmentExplorarBinding
     private val viewModel: MainViewModel by activityViewModels()
     companion object{
-        lateinit var list: MutableList<JogoFirestore>
+        lateinit var list: MutableList<Jogo>
         lateinit var modalidadesJogos: List<String>
     }
-    private inner class ContactAdapter(val contacts: List<JogoFirestore>) :
+    private inner class ContactAdapter(val contacts: List<Jogo>) :
         RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
 
 
@@ -97,7 +97,7 @@ class ExplorarFragment : Fragment() {
          */
         override fun getItemCount(): Int = contacts.size
 
-        fun getItemFireIdBase(position: Int): JogoFirestore = contacts[position]
+        fun getItemFireIdBase(position: Int): Jogo = contacts[position]
 
 
 
@@ -193,7 +193,7 @@ class ExplorarFragment : Fragment() {
             whereIn("modalidade", if (binding.tiposJogos.selectedItem.toString()=="Todos") modalidadesJogos else listOf(binding.tiposJogos.selectedItem.toString()))
                 .get().addOnSuccessListener { documents ->
                     for(document in documents){
-                        list.add(JogoFirestore(
+                        list.add(Jogo(
                             document.id,
                             document.data["modalidade"].toString(),
                             (document.data["inicio"] as Timestamp).toDate(),
