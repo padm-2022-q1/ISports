@@ -47,8 +47,13 @@ class NovoJogoFragment : Fragment() {
                     fim = sdf.parse("${binding.newGameData.text} ${binding.newGameTimeAte.text}")!!,
                     local = binding.cadastroEndereco.text.toString(),
                 ).let { jogo ->
-                    viewModel.addJogo(jogo).observe(viewLifecycleOwner) {
-                        findNavController().navigate(R.id.action_novoJogoFragment_to_explorarFragment)
+                    viewModel.addJogo(jogo).observe(viewLifecycleOwner) { status ->
+                        when(status) {
+                            is MainViewModel.Status.Success -> {
+                                findNavController().navigate(R.id.action_novoJogoFragment_to_explorarFragment)
+                            }
+                            else -> { }
+                        }
                     }
                 }
             }

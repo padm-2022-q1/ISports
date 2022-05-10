@@ -18,16 +18,14 @@ import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
 import br.edu.ufabc.isports.model.Jogo
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ExplorarFragment : Fragment() {
     private lateinit var binding: FragmentExplorarBinding
     private val viewModel: MainViewModel by activityViewModels()
+
     companion object{
-        lateinit var list: MutableList<Jogo>
         lateinit var modalidadesJogos: List<String>
     }
     private inner class ContactAdapter(val contacts: List<Jogo>) :
@@ -188,22 +186,18 @@ class ExplorarFragment : Fragment() {
             true
         }
         binding.explorarFiltrarButton.setOnClickListener {
-            list = mutableListOf()
-            FirebaseFirestore.getInstance().collection("Jogos").
-            whereIn("modalidade", if (binding.tiposJogos.selectedItem.toString()=="Todos") modalidadesJogos else listOf(binding.tiposJogos.selectedItem.toString()))
-                .get().addOnSuccessListener { documents ->
-                    for(document in documents){
-                        list.add(Jogo(
-                            document.id,
-                            document.data["modalidade"].toString(),
-                            (document.data["inicio"] as Timestamp).toDate(),
-                            (document.data["fim"] as Timestamp).toDate(),
-                            document.data["local"].toString()))
+            viewModel.getJogos(binding.tiposJogos.selectedItem.toString()).observe(viewLifecycleOwner) { status ->
+                when(status) {
+                    is MainViewModel.Status.Success -> {
+                        (status.result as MainViewModel.Result.GetJogos).value.let{
+                            binding.recyclerviewJogos.apply {
+                                adapter = ContactAdapter(it)
+                            }
+                        }
                     }
-                    binding.recyclerviewJogos.apply {
-                        adapter = ContactAdapter(list.toList())
-                    }
+                    else -> {}
                 }
+            }
         }
 
         binding.fabAddJogo.setOnClickListener {

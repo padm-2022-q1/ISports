@@ -12,15 +12,40 @@ import java.lang.Exception
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = Repository()
 
+    sealed class Result {
+        data class AddJogo(
+            val value: Boolean
+        ) : Result()
+        data class GetJogos(
+            val value: List<Jogo>
+        ) : Result()
+    }
+
+    sealed class Status {
+        class Failure(val e: Exception) : Status()
+        class Success(val result: Result) : Status()
+        object Loading : Status()
+    }
+
     val clickedItemId by lazy {
         MutableLiveData<Jogo>()
     }
 
     fun addJogo(jogoFirestore: JogoFirestore) = liveData {
         try {
-            emit(repository.addJogo(jogoFirestore))
+            emit(Status.Loading)
+            emit(Status.Success(Result.AddJogo(repository.addJogo(jogoFirestore).isSuccessful)))
         } catch (e: Exception) {
-            emit(Exception("Failet to add element", e))
+            emit(Status.Failure(Exception("Failet to add element", e)))
+        }
+    }
+
+    fun getJogos(modalidade: String) = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.GetJogos(repository.getJogos(modalidade))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failet to get element", e)))
         }
     }
 }

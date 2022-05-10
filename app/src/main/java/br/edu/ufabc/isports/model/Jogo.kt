@@ -6,7 +6,7 @@ import java.util.Date
 
 @Parcelize
 data class Jogo(
-    var id: String?,
+    var id: String,
     var modalidade: String,
     var inicio: Date,
     var fim: Date,
