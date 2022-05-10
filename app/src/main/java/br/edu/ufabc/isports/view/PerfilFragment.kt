@@ -12,8 +12,6 @@ import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentPerfilBinding
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.FirebaseAuth
 
 class PerfilFragment : Fragment() {
     private lateinit var binding: FragmentPerfilBinding
@@ -46,28 +44,27 @@ class PerfilFragment : Fragment() {
             true
         }
         binding.alterarCadastroButton.setOnClickListener { view ->
-            FirebaseAuth.getInstance()
-                .sendPasswordResetEmail(FirebaseAuth.getInstance().currentUser!!.email.toString())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
+            viewModel.recuperarSenha().observe(viewLifecycleOwner) { status ->
+                when(status) {
+                    is MainViewModel.Status.Success -> {
                         Snackbar.make(view, "Verifique sua caixa de email", Snackbar.LENGTH_SHORT)
                             .setBackgroundTint(Color.GRAY)
                             .setTextColor(Color.BLACK)
                             .show()
-                    } else {
-                        val erro = when(task.exception!!){
-                            is FirebaseNetworkException -> "Falha na comunicação com o servidor, tente novamente mais tarde"
-                            else -> "Erro inesperado. Tente novamente mais tarde"
-                        }
-                        Snackbar.make( view,erro, Snackbar.LENGTH_SHORT)
+                    }
+                    is MainViewModel.Status.Failure -> {
+                        Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                             .setBackgroundTint(Color.GRAY)
                             .setTextColor(Color.BLACK)
                             .show()
                     }
+                    else -> { }
                 }
+
+            }
         }
         binding.logoutButton.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            viewModel.singOut()
             findNavController().navigate(R.id.action_perfilFragment_to_loginFragment)
         }
     }

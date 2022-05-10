@@ -42,7 +42,7 @@ class ExplorarFragment : Fragment() {
             val icon = itemBinding.notesListFavorites
             init {
                 itemBinding.root.setOnClickListener {
-                    viewModel.clickedItemId.value = getItemFireIdBase(bindingAdapterPosition)
+                    viewModel.clickedItemId.value = contacts[bindingAdapterPosition]
                 }
 
             }
@@ -94,10 +94,6 @@ class ExplorarFragment : Fragment() {
          * The total quantity of items in the list.
          */
         override fun getItemCount(): Int = contacts.size
-
-        fun getItemFireIdBase(position: Int): Jogo = contacts[position]
-
-
 
         /**
          * Called when a view holder is recycled.

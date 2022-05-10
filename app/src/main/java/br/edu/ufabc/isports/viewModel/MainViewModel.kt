@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import br.edu.ufabc.isports.model.*
-import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -28,7 +27,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val value: List<Jogo>
         ) : Result()
         data class Logar(
-            val value: Task<AuthResult>
+            val value: AuthResult?
+        ) : Result()
+        data class RecuperarSenha(
+            val value: Void?
         ) : Result()
     }
 
@@ -59,6 +61,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Failure(Exception("Falha na comunicação com o servidor, tente novamente mais tarde", e)))
         } catch(e: Exception) {
             emit(Status.Failure(Exception("Erro ao logar usuário", e)))
+        }
+    }
+
+    fun singOut() = repositoryAuth.singOut()
+
+    fun recuperarSenha() = liveData {
+        try{
+            emit(Status.Loading)
+            emit(Status.Success(Result.RecuperarSenha(repositoryAuth.recuperarSenha(usuario.email))))
+        } catch (e: FirebaseNetworkException) {
+            emit(Status.Failure(Exception("Falha na comunicação com o servidor, tente novamente mais tarde", e)))
+        }
+        catch(e: Exception) {
+            emit(Status.Failure(Exception("Erro inesperado. Tente novamente mais tarde", e)))
         }
     }
 
