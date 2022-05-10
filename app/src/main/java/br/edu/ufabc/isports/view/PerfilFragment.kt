@@ -60,7 +60,6 @@ class PerfilFragment : Fragment() {
                     }
                     else -> { }
                 }
-
             }
         }
         binding.logoutButton.setOnClickListener {

@@ -1,6 +1,7 @@
 package br.edu.ufabc.isports.viewModel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -66,14 +67,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun singOut() = repositoryAuth.singOut()
 
-    fun recuperarSenha() = liveData {
+    fun recuperarSenha(email: String? = null) = liveData {
         try{
             emit(Status.Loading)
-            emit(Status.Success(Result.RecuperarSenha(repositoryAuth.recuperarSenha(usuario.email))))
+            emit(Status.Success(Result.RecuperarSenha(repositoryAuth.recuperarSenha(email ?: usuario.email))))
+        } catch (e: FirebaseAuthInvalidCredentialsException){
+            emit(Status.Failure(Exception("O campo de email está mal formatado", e)))
+        } catch(e: FirebaseAuthInvalidUserException) {
+            emit(Status.Failure(Exception("Não foi encontrado nenhum cadastro com esse email", e)))
         } catch (e: FirebaseNetworkException) {
             emit(Status.Failure(Exception("Falha na comunicação com o servidor, tente novamente mais tarde", e)))
-        }
-        catch(e: Exception) {
+        } catch(e: Exception) {
             emit(Status.Failure(Exception("Erro inesperado. Tente novamente mais tarde", e)))
         }
     }

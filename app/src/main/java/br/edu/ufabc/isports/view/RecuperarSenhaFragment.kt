@@ -6,17 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentRecuperarSenhaBinding
+import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 
 class RecuperarSenhaFragment : Fragment(){
     private lateinit var  binding: FragmentRecuperarSenhaBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,28 +43,24 @@ class RecuperarSenhaFragment : Fragment(){
                     .setTextColor(Color.BLACK)
                     .show()
             } else{
-                FirebaseAuth.getInstance()
-                    .sendPasswordResetEmail(email)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Snackbar.make(view, "Verifique sua caixa de email", Snackbar.LENGTH_SHORT)
+                viewModel.recuperarSenha(email).observe(viewLifecycleOwner) { status ->
+                    when (status) {
+                        is MainViewModel.Status.Success -> {
+                            Snackbar.make( view, "Verifique sua caixa de email", Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
                             findNavController().navigate(R.id.action_recuperarSenhaFragment_to_loginFragment)
-                        } else {
-                            val erro = when(task.exception!!){
-                                is FirebaseAuthInvalidCredentialsException -> "O campo de email está mal formatado"
-                                is FirebaseAuthInvalidUserException -> "Não foi encontrado nenhum cadastro com esse email"
-                                is FirebaseNetworkException -> "Falha na comunicação com o servidor, tente novamente mais tarde"
-                                else -> "Erro inesperado. Tente novamente mais tarde"
-                            }
-                            Snackbar.make( view,erro, Snackbar.LENGTH_SHORT)
+                        }
+                        is MainViewModel.Status.Failure -> {
+                            Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
                         }
+                        else -> {}
                     }
+                }
             }
         }
     }
