@@ -13,7 +13,6 @@ import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentLoginBinding
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.*
 
 class LoginFragment : Fragment(){
     private lateinit var  binding: FragmentLoginBinding
@@ -31,12 +30,21 @@ class LoginFragment : Fragment(){
     override fun onStart() {
         super.onStart()
         activity?.let {
-            if(FirebaseAuth.getInstance().currentUser != null){
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
-                    popUpTo(findNavController().graph.startDestinationId){
-                        inclusive=true
+            viewModel.setUsuario().observe(viewLifecycleOwner) { status ->
+                when(status){
+                    is MainViewModel.Status.Success -> {
+                        (status.result as MainViewModel.Result.SetUsuario).value.let {
+                            if(it != null){
+                                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
+                                    popUpTo(findNavController().graph.startDestinationId){
+                                        inclusive=true
+                                    }
+                                })
+                            }
+                        }
                     }
-                })
+                    else -> { }
+                }
             }
             bindEvents()
         }
@@ -56,6 +64,7 @@ class LoginFragment : Fragment(){
                 viewModel.logar(email, password).observe(viewLifecycleOwner) { status ->
                     when(status) {
                         is MainViewModel.Status.Success -> {
+                            viewModel.setUsuario()
                             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
                                 popUpTo(findNavController().graph.startDestinationId){
                                     inclusive=true

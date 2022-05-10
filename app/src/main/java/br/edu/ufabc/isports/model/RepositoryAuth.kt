@@ -17,4 +17,6 @@ class RepositoryAuth {
             .await()
         return op
     }
+
+    fun getUsuarioLogado() = auth.currentUser
 }

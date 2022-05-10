@@ -4,10 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import br.edu.ufabc.isports.model.Jogo
-import br.edu.ufabc.isports.model.JogoFirestore
-import br.edu.ufabc.isports.model.RepositoryAuth
-import br.edu.ufabc.isports.model.RepositoryFirestore
+import br.edu.ufabc.isports.model.*
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.AuthResult
@@ -18,8 +15,12 @@ import java.lang.Exception
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repositoryFirestore = RepositoryFirestore()
     private val repositoryAuth = RepositoryAuth()
+    lateinit var usuario: Usuario
 
     sealed class Result {
+        data class SetUsuario(
+            val value: Usuario?
+        ) : Result()
         data class AddJogo(
             val value: Boolean
         ) : Result()
@@ -58,6 +59,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Failure(Exception("Falha na comunicação com o servidor, tente novamente mais tarde", e)))
         } catch(e: Exception) {
             emit(Status.Failure(Exception("Erro ao logar usuário", e)))
+        }
+    }
+
+    fun setUsuario() = liveData {
+        try {
+            emit(Status.Loading)
+            repositoryAuth.getUsuarioLogado()?.let{ user ->
+                val name = repositoryFirestore.getNameUser(user.uid)
+                usuario = Usuario(user.uid, user.email!!, name)
+                emit(Status.Success(Result.SetUsuario(usuario)))
+            }
+            emit(Status.Success(Result.SetUsuario(null)))
+        } catch(e: Exception) {
+            emit(Status.Failure(Exception("Failet to get user", e)))
         }
     }
 

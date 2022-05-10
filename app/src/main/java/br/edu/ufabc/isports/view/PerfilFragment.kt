@@ -6,16 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentPerfilBinding
+import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 
 class PerfilFragment : Fragment() {
     private lateinit var binding: FragmentPerfilBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,15 +31,8 @@ class PerfilFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         activity?.let{
-            FirebaseFirestore.getInstance().collection("Usuarios")
-                .document(FirebaseAuth.getInstance().currentUser!!.uid)
-                .addSnapshotListener { value, _ ->
-                    if(value != null){
-                        binding.perfilUsername.text = value.getString("username")
-                        binding.perfilEmail.text = FirebaseAuth.getInstance().currentUser!!.email
-                    }
-                }
-
+            binding.perfilUsername.text = viewModel.usuario.nome
+            binding.perfilEmail.text = viewModel.usuario.email
             bindEvents()
         }
     }

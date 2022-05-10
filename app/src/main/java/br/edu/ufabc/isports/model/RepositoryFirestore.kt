@@ -9,6 +9,7 @@ class RepositoryFirestore {
 
     companion object {
         private const val jogosCollection = "Jogos"
+        private const val usuarioCollection = "Usuarios"
 
         private object JogoDoc {
             const val modalidade = "modalidade"
@@ -16,9 +17,14 @@ class RepositoryFirestore {
             const val fim = "fim"
             const val local = "local"
         }
+
+        private object UsuarioDoc {
+            const val nome = "username"
+        }
     }
 
     private fun getJogosCollection() = db.collection(jogosCollection)
+    private fun getUsuariosCollection() = db.collection(usuarioCollection)
 
     fun addJogo(jogoFirestore: JogoFirestore) =
         getJogosCollection().add(jogoFirestore)
@@ -45,4 +51,11 @@ class RepositoryFirestore {
             }
         return list
     }
+
+    suspend fun getNameUser(uid: String): String  = getUsuariosCollection()
+        .document(uid)
+        .get()
+        .await()
+        .data!![UsuarioDoc.nome]
+        .toString()
 }
