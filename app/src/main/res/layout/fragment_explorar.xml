@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_tint_30"
-    tools:context=".ExplorarFragment">
+    tools:context=".view.ExplorarFragment">
 
     <Spinner
         android:id="@+id/tipos_jogos"

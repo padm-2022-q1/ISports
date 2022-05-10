@@ -1,4 +1,4 @@
-package br.edu.ufabc.isports
+package br.edu.ufabc.isports.view
 
 import android.graphics.Color
 import android.os.Bundle

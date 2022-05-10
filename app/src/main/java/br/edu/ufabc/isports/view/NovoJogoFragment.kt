@@ -1,4 +1,4 @@
-package br.edu.ufabc.isports
+package br.edu.ufabc.isports.view
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.navigation.fragment.findNavController
+import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentNovoJogoBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -88,7 +89,7 @@ class NovoJogoFragment : Fragment() {
 
     private fun createSpinner() {
         val spinner: Spinner = binding.tiposJogos
-        adapterSpinner(spinner,R.array.tipos_jogos)
+        adapterSpinner(spinner, R.array.tipos_jogos)
     }
     private fun adapterSpinner(spinner: Spinner, array:Int){
         ArrayAdapter.createFromResource(

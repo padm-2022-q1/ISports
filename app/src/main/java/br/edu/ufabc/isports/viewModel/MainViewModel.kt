@@ -1,4 +1,4 @@
-package br.edu.ufabc.isports
+package br.edu.ufabc.isports.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -1,4 +1,4 @@
-package br.edu.ufabc.isports
+package br.edu.ufabc.isports.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentMeusJogosBinding
 
 class HistoricoFragment : Fragment() {

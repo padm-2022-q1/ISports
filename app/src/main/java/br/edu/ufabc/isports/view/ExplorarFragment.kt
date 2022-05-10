@@ -1,4 +1,4 @@
-package br.edu.ufabc.isports
+package br.edu.ufabc.isports.view
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import br.edu.ufabc.isports.viewModel.MainViewModel
+import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
 import br.edu.ufabc.isports.model.JogoFirestore
@@ -115,7 +117,7 @@ class ExplorarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentExplorarBinding.inflate(inflater, container, false)
-        modalidadesJogos= resources.getStringArray(R.array.tipos_jogos).toList()
+        modalidadesJogos = resources.getStringArray(R.array.tipos_jogos).toList()
         bindEvents()
         createSpinner()
         createDate()
@@ -170,7 +172,7 @@ class ExplorarFragment : Fragment() {
 
     private fun createSpinner() {
         val spinner: Spinner = binding.tiposJogos
-        adapterSpinner(spinner,R.array.tipos_jogos)
+        adapterSpinner(spinner, R.array.tipos_jogos)
     }
 
     private fun bindEvents()

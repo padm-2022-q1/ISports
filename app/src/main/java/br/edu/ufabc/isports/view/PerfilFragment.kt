@@ -1,4 +1,4 @@
-package br.edu.ufabc.isports
+package br.edu.ufabc.isports.view
 
 import android.graphics.Color
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentPerfilBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseNetworkException

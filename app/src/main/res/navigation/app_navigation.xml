@@ -6,7 +6,7 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="br.edu.ufabc.isports.LoginFragment"
+        android:name="br.edu.ufabc.isports.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/cadastroFragment"
-        android:name="br.edu.ufabc.isports.CadastroFragment"
+        android:name="br.edu.ufabc.isports.view.CadastroFragment"
         android:label="fragment_cadastro"
         tools:layout="@layout/fragment_cadastro" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/explorarFragment"
-        android:name="br.edu.ufabc.isports.ExplorarFragment"
+        android:name="br.edu.ufabc.isports.view.ExplorarFragment"
         android:label="fragment_explorar"
         tools:layout="@layout/fragment_explorar" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/meusJogosFragment"
-        android:name="br.edu.ufabc.isports.MeusJogosFragment"
+        android:name="br.edu.ufabc.isports.view.MeusJogosFragment"
         android:label="fragment_meus_jogos"
         tools:layout="@layout/fragment_meus_jogos" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/perfilFragment"
-        android:name="br.edu.ufabc.isports.PerfilFragment"
+        android:name="br.edu.ufabc.isports.view.PerfilFragment"
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" >
         <action
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/novoJogoFragment"
-        android:name="br.edu.ufabc.isports.NovoJogoFragment"
+        android:name="br.edu.ufabc.isports.view.NovoJogoFragment"
         android:label="fragment_novo_jogo"
         tools:layout="@layout/fragment_novo_jogo" >
         <action
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/historicoFragment"
-        android:name="br.edu.ufabc.isports.HistoricoFragment"
+        android:name="br.edu.ufabc.isports.view.HistoricoFragment"
         android:label="HistoricoFragment" >
         <action
             android:id="@+id/action_historicoFragment_to_meusJogosFragment"
@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/recuperarSenhaFragment"
-        android:name="br.edu.ufabc.isports.RecuperarSenhaFragment"
+        android:name="br.edu.ufabc.isports.view.RecuperarSenhaFragment"
         android:label="RecuperarSenhaFragment" >
         <action
             android:id="@+id/action_recuperarSenhaFragment_to_loginFragment"
@@ -109,7 +109,7 @@
     </fragment>
     <fragment
         android:id="@+id/jogosDetailsFragment"
-        android:name="br.edu.ufabc.isports.JogosDetailsFragment"
+        android:name="br.edu.ufabc.isports.view.JogosDetailsFragment"
         android:label="fragment_jogos_details"
         tools:layout="@layout/fragment_jogos_details" >
         <argument
