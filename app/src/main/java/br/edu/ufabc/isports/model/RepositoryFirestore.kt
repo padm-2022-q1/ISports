@@ -4,7 +4,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
-class Repository {
+class RepositoryFirestore {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     companion object {

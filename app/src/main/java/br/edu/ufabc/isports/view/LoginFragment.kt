@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentLoginBinding
+import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.*
 
 class LoginFragment : Fragment(){
     private lateinit var  binding: FragmentLoginBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,34 +53,24 @@ class LoginFragment : Fragment(){
                     .setTextColor(Color.BLACK)
                     .show()
             } else{
-                FirebaseAuth.getInstance()
-                    .signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if(task.isSuccessful){
+                viewModel.logar(email, password).observe(viewLifecycleOwner) { status ->
+                    when(status) {
+                        is MainViewModel.Status.Success -> {
                             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
                                 popUpTo(findNavController().graph.startDestinationId){
                                     inclusive=true
                                 }
                             })
-                        } else{
-                            val erro = when(task.exception!!){
-                                is FirebaseAuthInvalidCredentialsException -> {
-                                    when(task.exception!!.message.toString().trim()){
-                                        "The email address is badly formatted." -> "Endereço de email está mal formatado"
-                                        "The password is invalid or the user does not have a password." -> "Senha incorreta"
-                                        else -> "Erro ao autenticar usuário"
-                                    }
-                                }
-                                is FirebaseAuthInvalidUserException -> "Usuário não encontrado"
-                                is FirebaseNetworkException -> "Falha na comunicação com o servidor, tente novamente mais tarde"
-                                else -> "Erro ao cadastrar usuário"
-                            }
-                            Snackbar.make(view, erro, Snackbar.LENGTH_SHORT)
+                        }
+                        is MainViewModel.Status.Failure -> {
+                            Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
                         }
+                        else -> { }
                     }
+                }
             }
         }
         binding.cadastroTextView.setOnClickListener {
