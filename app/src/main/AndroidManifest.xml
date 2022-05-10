@@ -8,8 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ISports"
-        android:name="br.edu.ufabc.isports.App">
+        android:theme="@style/Theme.ISports">
         <activity
             android:name="br.edu.ufabc.isports.MainActivity"
             android:exported="true">
