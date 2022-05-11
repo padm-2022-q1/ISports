@@ -31,7 +31,7 @@ class RepositoryFirestore {
     fun addJogo(jogoFirestore: JogoFirestore) =
         getJogosCollection().add(jogoFirestore)
 
-    suspend fun getJogos(modalidade: String): List<Jogo> {
+    suspend fun getJogosExplorar(modalidade: String, uid: String): List<Jogo> {
         val list: MutableList<Jogo> = mutableListOf()
         val query = when(modalidade) {
             "Todos" -> getJogosCollection()
@@ -43,14 +43,19 @@ class RepositoryFirestore {
             .await()
             .documents.let { documents ->
                 for (document in documents) {
-                    list.add(Jogo(
-                        document.id,
-                        document.data!![JogoDoc.modalidade].toString(),
-                        (document.data!![JogoDoc.inicio] as Timestamp).toDate(),
-                        (document.data!![JogoDoc.fim] as Timestamp).toDate(),
-                        document.data!![JogoDoc.local].toString(),
-                        document.data!![JogoDoc.participantes] as List<Participantes>)
-                    )
+                    val participantes: List<Participantes> = document.data!![JogoDoc.participantes] as List<Participantes>
+                    if(!participantes.any { o -> o.uid == uid }) {
+                        list.add(
+                            Jogo(
+                                document.id,
+                                document.data!![JogoDoc.modalidade].toString(),
+                                (document.data!![JogoDoc.inicio] as Timestamp).toDate(),
+                                (document.data!![JogoDoc.fim] as Timestamp).toDate(),
+                                document.data!![JogoDoc.local].toString(),
+                                participantes
+                            )
+                        )
+                    }
                 }
             }
         return list

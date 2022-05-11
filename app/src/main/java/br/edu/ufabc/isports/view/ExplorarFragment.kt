@@ -182,7 +182,7 @@ class ExplorarFragment : Fragment() {
             true
         }
         binding.explorarFiltrarButton.setOnClickListener {
-            viewModel.getJogos(binding.tiposJogos.selectedItem.toString()).observe(viewLifecycleOwner) { status ->
+            viewModel.getJogosExplorar(binding.tiposJogos.selectedItem.toString()).observe(viewLifecycleOwner) { status ->
                 when(status) {
                     is MainViewModel.Status.Success -> {
                         (status.result as MainViewModel.Result.GetJogos).value.let{
