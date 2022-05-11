@@ -18,14 +18,13 @@ class JogosDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentJogosDetailsBinding.inflate(inflater, container, false)
-        bindEvents()
+        initTexts()
         return binding.root
     }
 
-    private fun bindEvents()
-    {
+    private fun initTexts() {
         args.jogoItem.takeIf { it?.id?.isNotEmpty() == true }?.also { jogoItem ->
-            binding.textoTeste.text = jogoItem.id
+            binding.jogoId.text = jogoItem.id
         }
     }
 
