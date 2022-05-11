@@ -1,7 +1,7 @@
 package br.edu.ufabc.isports.model
 
-import android.util.Log
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
@@ -55,6 +55,10 @@ class RepositoryFirestore {
             }
         return list
     }
+
+    suspend fun addParticipante(uid: String, userId: String, username: String): Void? = getJogosCollection().document(uid)
+        .update(JogoDoc.participantes, FieldValue.arrayUnion(Participantes(userId, username)))
+        .await()
 
     suspend fun setUsername(uid: String, username: String): Void? = getUsuariosCollection()
         .document(uid)

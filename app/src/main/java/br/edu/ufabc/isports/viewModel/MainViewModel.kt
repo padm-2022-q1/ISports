@@ -21,6 +21,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         data class AddJogo(
             val value: Boolean
         ) : Result()
+        data class AddParticipante(
+            val value: Void?
+        ) : Result()
         data class GetJogos(
             val value: List<Jogo>
         ) : Result()
@@ -121,6 +124,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Success(Result.AddJogo(repositoryFirestore.addJogo(jogoFirestore).isSuccessful)))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failet to add element", e)))
+        }
+    }
+
+    fun addParticipante(uid: String) = liveData {
+        try{
+            emit(Status.Loading)
+            emit(Status.Success(Result.AddParticipante(repositoryFirestore.addParticipante(uid, usuario.id, usuario.nome))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failet to update element", e)))
         }
     }
 
