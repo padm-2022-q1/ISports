@@ -1,15 +1,12 @@
 package br.edu.ufabc.isports.viewModel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import br.edu.ufabc.isports.model.*
 import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.*
 import java.lang.Exception
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -31,6 +28,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val value: AuthResult?
         ) : Result()
         data class RecuperarSenha(
+            val value: Void?
+        ) : Result()
+        data class CriarUsuario(
             val value: Void?
         ) : Result()
     }
@@ -82,11 +82,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun createUsuario(email: String, password: String, username: String) = liveData {
+        try{
+            emit(Status.Loading)
+            repositoryAuth.createUser(email, password).user?.uid?.let{ uid ->
+                emit(Status.Success(Result.CriarUsuario(repositoryFirestore.setUsername(uid, username))))
+            }
+        } catch(e: FirebaseAuthWeakPasswordException) {
+            emit(Status.Failure(Exception("Digite uma senha com no minimo 6 caracteres", e)))
+        } catch(e: FirebaseAuthUserCollisionException) {
+            emit(Status.Failure(Exception("Esta conta já foi cadastrada", e)))
+        } catch(e: FirebaseAuthInvalidCredentialsException) {
+            emit(Status.Failure(Exception("E-mail inválido", e)))
+        } catch(e: FirebaseNetworkException) {
+            emit(Status.Failure(Exception("Falha na comunicação com o servidor, tente novamente mais tarde", e)))
+        } catch(e: Exception) {
+            emit(Status.Failure(Exception("Erro inesperado. Tente novamente mais tarde", e)))
+        }
+    }
+
     fun setUsuario() = liveData {
         try {
             emit(Status.Loading)
             repositoryAuth.getUsuarioLogado()?.let{ user ->
-                val name = repositoryFirestore.getNameUser(user.uid)
+                val name = repositoryFirestore.getUsername(user.uid)
                 usuario = Usuario(user.uid, user.email!!, name)
                 emit(Status.Success(Result.SetUsuario(usuario)))
             }

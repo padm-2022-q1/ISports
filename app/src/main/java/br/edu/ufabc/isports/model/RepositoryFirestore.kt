@@ -52,7 +52,12 @@ class RepositoryFirestore {
         return list
     }
 
-    suspend fun getNameUser(uid: String): String  = getUsuariosCollection()
+    suspend fun setUsername(uid: String, username: String): Void? = getUsuariosCollection()
+        .document(uid)
+        .set(mapOf("username" to username))
+        .await()
+
+    suspend fun getUsername(uid: String): String  = getUsuariosCollection()
         .document(uid)
         .get()
         .await()

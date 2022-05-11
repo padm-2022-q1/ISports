@@ -1,6 +1,5 @@
 package br.edu.ufabc.isports.model
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 
@@ -17,4 +16,7 @@ class RepositoryAuth {
 
     suspend fun recuperarSenha(email: String) =
         auth.sendPasswordResetEmail(email).await()
+
+    suspend fun createUser(email: String, password: String) =
+        auth.createUserWithEmailAndPassword(email, password).await()
 }

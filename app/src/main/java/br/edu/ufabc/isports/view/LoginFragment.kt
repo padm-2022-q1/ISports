@@ -64,12 +64,13 @@ class LoginFragment : Fragment(){
                 viewModel.logar(email, password).observe(viewLifecycleOwner) { status ->
                     when(status) {
                         is MainViewModel.Status.Success -> {
-                            viewModel.setUsuario()
-                            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
-                                popUpTo(findNavController().graph.startDestinationId){
-                                    inclusive=true
-                                }
-                            })
+                            viewModel.setUsuario().observe(viewLifecycleOwner) {
+                                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
+                                    popUpTo(findNavController().graph.startDestinationId){
+                                        inclusive=true
+                                    }
+                                })
+                            }
                         }
                         is MainViewModel.Status.Failure -> {
                             Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)

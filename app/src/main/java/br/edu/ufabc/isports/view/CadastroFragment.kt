@@ -6,20 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import br.edu.ufabc.isports.databinding.FragmentCadastroBinding
+import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 class CadastroFragment : Fragment() {
     private lateinit var binding: FragmentCadastroBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,29 +52,26 @@ class CadastroFragment : Fragment() {
                     .setTextColor(Color.BLACK)
                     .show()
             } else{
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                    if(task.isSuccessful){
-                        FirebaseFirestore.getInstance().collection("Usuarios")
-                            .document(FirebaseAuth.getInstance().currentUser!!.uid)
-                            .set(mapOf("username" to username))
-                        findNavController().navigate(CadastroFragmentDirections.actionCadastroFragmentToMeusJogosFragment(), navOptions {
-                            popUpTo(findNavController().graph.startDestinationId){
-                                inclusive=true
+                viewModel.createUsuario(email, password, username).observe(viewLifecycleOwner) { status ->
+                    when(status) {
+                        is MainViewModel.Status.Success -> {
+                            viewModel.setUsuario().observe(viewLifecycleOwner) {
+                                findNavController().navigate(CadastroFragmentDirections.actionCadastroFragmentToMeusJogosFragment(), navOptions {
+                                    popUpTo(findNavController().graph.startDestinationId){
+                                        inclusive=true
+                                    }
+                                })
                             }
-                        })
-                    } else{
-                        val erro = when(task.exception!!){
-                            is FirebaseAuthWeakPasswordException -> "Digite uma senha com no minimo 6 caracteres"
-                            is FirebaseAuthUserCollisionException -> "Esta conta já foi cadastrada"
-                            is FirebaseAuthInvalidCredentialsException -> "E-mail inválido"
-                            is FirebaseNetworkException -> "Falha na comunicação com o servidor, tente novamente mais tarde"
-                            else -> "Erro ao cadastrar usuário"
                         }
-                        Snackbar.make(view, erro, Snackbar.LENGTH_SHORT)
-                            .setBackgroundTint(Color.GRAY)
-                            .setTextColor(Color.BLACK)
-                            .show()
+                        is MainViewModel.Status.Failure -> {
+                            Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)
+                                .setBackgroundTint(Color.GRAY)
+                                .setTextColor(Color.BLACK)
+                                .show()
+                        }
+                        else -> { }
                     }
+
                 }
             }
         }
