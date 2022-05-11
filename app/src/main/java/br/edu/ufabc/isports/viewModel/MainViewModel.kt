@@ -153,4 +153,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             emit(Status.Failure(Exception("Failet to get element", e)))
         }
     }
+
+    fun getHistorico() = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.GetJogos(repositoryFirestore.getHistorico(usuario.id, usuario.username))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failet to get element", e)))
+        }
+    }
 }
