@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentNovoJogoBinding
 import br.edu.ufabc.isports.model.JogoFirestore
+import br.edu.ufabc.isports.model.Participantes
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,11 +42,14 @@ class NovoJogoFragment : Fragment() {
         when (item.itemId) {
             R.id.action_save -> {
                 val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                val list = mutableListOf<Participantes>()
+                list.add(Participantes(viewModel.usuario.id, viewModel.usuario.nome))
                 JogoFirestore(
                     modalidade = binding.tiposJogos.selectedItem.toString(),
                     inicio = sdf.parse("${binding.newGameData.text} ${binding.newGameTimeDe.text}")!!,
                     fim = sdf.parse("${binding.newGameData.text} ${binding.newGameTimeAte.text}")!!,
                     local = binding.cadastroEndereco.text.toString(),
+                    participantes = list
                 ).let { jogo ->
                     viewModel.addJogo(jogo).observe(viewLifecycleOwner) { status ->
                         when(status) {

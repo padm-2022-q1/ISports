@@ -1,5 +1,6 @@
 package br.edu.ufabc.isports.model
 
+import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -16,6 +17,7 @@ class RepositoryFirestore {
             const val inicio = "inicio"
             const val fim = "fim"
             const val local = "local"
+            const val participantes = "participantes"
         }
 
         private object UsuarioDoc {
@@ -46,7 +48,9 @@ class RepositoryFirestore {
                         document.data!![JogoDoc.modalidade].toString(),
                         (document.data!![JogoDoc.inicio] as Timestamp).toDate(),
                         (document.data!![JogoDoc.fim] as Timestamp).toDate(),
-                        document.data!![JogoDoc.local].toString()))
+                        document.data!![JogoDoc.local].toString(),
+                        document.data!![JogoDoc.participantes] as List<Participantes>)
+                    )
                 }
             }
         return list

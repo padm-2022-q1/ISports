@@ -6,5 +6,6 @@ data class JogoFirestore(
     var modalidade: String,
     var inicio: Date,
     var fim: Date,
-    var local: String
+    var local: String,
+    var participantes: List<Participantes>
 )
