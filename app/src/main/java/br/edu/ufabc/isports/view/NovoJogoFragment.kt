@@ -43,7 +43,7 @@ class NovoJogoFragment : Fragment() {
             R.id.action_save -> {
                 val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                 val list = mutableListOf<Participantes>()
-                list.add(Participantes(viewModel.usuario.id, viewModel.usuario.nome))
+                list.add(Participantes(viewModel.usuario.id, viewModel.usuario.username))
                 JogoFirestore(
                     modalidade = binding.tiposJogos.selectedItem.toString(),
                     inicio = sdf.parse("${binding.newGameData.text} ${binding.newGameTimeDe.text}")!!,

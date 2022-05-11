@@ -130,7 +130,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addParticipante(uid: String) = liveData {
         try{
             emit(Status.Loading)
-            emit(Status.Success(Result.AddParticipante(repositoryFirestore.addParticipante(uid, usuario.id, usuario.nome))))
+            emit(Status.Success(Result.AddParticipante(repositoryFirestore.addParticipante(uid, usuario.id, usuario.username))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failet to update element", e)))
         }
@@ -140,6 +140,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         try {
             emit(Status.Loading)
             emit(Status.Success(Result.GetJogos(repositoryFirestore.getJogosExplorar(modalidade, usuario.id))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failet to get element", e)))
+        }
+    }
+
+    fun getMeusJogos() = liveData {
+        try {
+            emit(Status.Loading)
+            emit(Status.Success(Result.GetJogos(repositoryFirestore.getMeusJogos(usuario.id, usuario.username))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failet to get element", e)))
         }

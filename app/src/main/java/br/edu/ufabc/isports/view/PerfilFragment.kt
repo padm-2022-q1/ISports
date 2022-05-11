@@ -29,7 +29,7 @@ class PerfilFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         activity?.let{
-            binding.perfilUsername.text = viewModel.usuario.nome
+            binding.perfilUsername.text = viewModel.usuario.username
             binding.perfilEmail.text = viewModel.usuario.email
             bindEvents()
         }

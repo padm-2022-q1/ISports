@@ -4,6 +4,9 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
+import java.time.LocalDate
+import java.time.ZoneId
+import java.util.*
 
 class RepositoryFirestore {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -56,6 +59,32 @@ class RepositoryFirestore {
                             )
                         )
                     }
+                }
+            }
+        return list
+    }
+
+    suspend fun getMeusJogos(uid: String, username: String): List<Jogo> {
+        val list: MutableList<Jogo> = mutableListOf()
+        val hoje = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant())
+        getJogosCollection()
+            .whereGreaterThan(JogoDoc.inicio, hoje)
+            .whereArrayContains(JogoDoc.participantes, Participantes(uid, username))
+            .orderBy(JogoDoc.inicio)
+            .get()
+            .await()
+            .documents.let { documents ->
+                for (document in documents) {
+                    list.add(
+                        Jogo(
+                            document.id,
+                            document.data!![JogoDoc.modalidade].toString(),
+                            (document.data!![JogoDoc.inicio] as Timestamp).toDate(),
+                            (document.data!![JogoDoc.fim] as Timestamp).toDate(),
+                            document.data!![JogoDoc.local].toString(),
+                            document.data!![JogoDoc.participantes] as List<Participantes>
+                        )
+                    )
                 }
             }
         return list
