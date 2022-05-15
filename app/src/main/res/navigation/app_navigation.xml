@@ -116,5 +116,8 @@
             android:name="jogoItem"
             app:argType="br.edu.ufabc.isports.model.Jogo"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_jogosDetailsFragment_to_explorarFragment"
+            app:destination="@id/explorarFragment" />
     </fragment>
 </navigation>

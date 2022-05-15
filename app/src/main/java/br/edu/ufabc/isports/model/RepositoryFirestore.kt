@@ -48,7 +48,7 @@ class RepositoryFirestore {
             .documents.let { documents ->
                 for (document in documents) {
                     val participantes: List<Participantes> = document.data!![JogoDoc.participantes] as List<Participantes>
-                    if(!participantes.any { o -> o.uid == uid }) {
+                    if(!participantes.toString().contains(uid)) {
                         list.add(
                             Jogo(
                                 document.id,

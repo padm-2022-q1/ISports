@@ -11,7 +11,9 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import br.edu.ufabc.isports.R
@@ -172,7 +174,11 @@ class ExplorarFragment : Fragment() {
     private fun bindEvents()
     {
         viewModel.clickedItemId.observe(viewLifecycleOwner){
-            findNavController().navigate(ExplorarFragmentDirections.onClickItem(it))
+            if(viewModel.clickedItemId.value!=null){
+                findNavController().navigate(ExplorarFragmentDirections.onClickItem(it), navOptions {
+                    popUpTo(R.id.explorarFragment)
+                })
+            }
         }
         binding.bottomNavigationExplorar.setOnItemSelectedListener { item ->
             when(item.itemId) {
