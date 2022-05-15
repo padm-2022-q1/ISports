@@ -61,4 +61,8 @@
     <string name="action_save_title">Novo jogo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fab_participar_text">PARTICIPAR</string>
+    <string name="inicio">inicio</string>
+    <string name="fim">fim</string>
+    <string name="local">local</string>
+    <string name="participantes">Participantes</string>
 </resources>
