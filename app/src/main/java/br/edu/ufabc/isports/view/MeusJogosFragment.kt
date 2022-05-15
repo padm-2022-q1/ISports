@@ -103,8 +103,36 @@ class MeusJogosFragment : Fragment() {
     ): View {
         binding = FragmentMeusJogosBinding.inflate(inflater, container, false)
         bindEvents()
-        reset()
         return binding.root
+    }
+
+    private fun reset(){
+        binding.swipeRefreshLayout.isRefreshing = true
+        viewModel.getMeusJogos().observe(viewLifecycleOwner) { status ->
+            when(status) {
+                is MainViewModel.Status.Success -> {
+                    (status.result as MainViewModel.Result.GetJogos).value.let{
+                        if(it.isEmpty()){
+                            binding.meusJogosMatchNotFoundTextView.visibility = View.VISIBLE
+                        } else{
+                            binding.recyclerviewMeusJogos.apply {
+                                adapter = ContactAdapter(it)
+                            }
+                        }
+                    }
+                }
+                else -> {}
+            }
+        }
+        binding.swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onStart() {
+        super.onStart()
+        reset()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            reset()
+        }
     }
     private fun bindEvents() {
         viewModel.clickedItemId.observe(viewLifecycleOwner){
@@ -126,24 +154,6 @@ class MeusJogosFragment : Fragment() {
         }
     }
 
-    private fun reset(){
-        viewModel.getMeusJogos().observe(viewLifecycleOwner) { status ->
-            when(status) {
-                is MainViewModel.Status.Success -> {
-                    (status.result as MainViewModel.Result.GetJogos).value.let{
-                        if(it.isEmpty()){
-                            binding.meusJogosMatchNotFoundTextView.visibility = View.VISIBLE
-                        } else{
-                            binding.recyclerviewMeusJogos.apply {
-                                Log.d("ENTREI","ENTROU NO ADAPTER ${it}")
-                                adapter = ContactAdapter(it)
-                            }
-                        }
-                    }
-                }
-                else -> {}
-            }
-        }
-    }
+
 
 }

@@ -104,7 +104,6 @@ class HistoricoFragment : Fragment() {
         binding.meusJogosMatchNotFoundTextView.text = getString(R.string.match_not_found_historico)
         binding.fabHistoric.text = getString(R.string.fab_historic_text_historico)
         bindEvents()
-        reset()
         return binding.root
     }
     private fun bindEvents() {
@@ -128,6 +127,7 @@ class HistoricoFragment : Fragment() {
     }
 
     private fun reset(){
+        binding.swipeRefreshLayout.isRefreshing = true
         viewModel.getHistorico().observe(viewLifecycleOwner) { status ->
             when(status) {
                 is MainViewModel.Status.Success -> {
@@ -143,6 +143,14 @@ class HistoricoFragment : Fragment() {
                 }
                 else -> {}
             }
+        }
+        binding.swipeRefreshLayout.isRefreshing = false
+    }
+    override fun onStart() {
+        super.onStart()
+        reset()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            reset()
         }
     }
 

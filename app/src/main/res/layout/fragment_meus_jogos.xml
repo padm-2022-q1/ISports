@@ -7,19 +7,25 @@
     tools:context=".view.MeusJogosFragment"
     android:background="@color/black_tint_30">
 
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_above="@id/bottom_navigation_jogos">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_meus_jogos"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </ScrollView>
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_meus_jogos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 
     <TextView
