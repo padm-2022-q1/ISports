@@ -36,6 +36,13 @@
         <item>Tenis</item>
         <item>Vôlei</item>
     </string-array>
+    <string-array name="add_jogos">
+        <item>Basquete</item>
+        <item>Futsal</item>
+        <item>Futebol</item>
+        <item>Tenis</item>
+        <item>Vôlei</item>
+    </string-array>
     <string name="username_text">Username</string>
     <string name="signup_address_hint">Endereço</string>
     <string name="log_out_text">Log Out</string>

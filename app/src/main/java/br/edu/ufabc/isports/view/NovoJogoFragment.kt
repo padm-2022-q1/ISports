@@ -101,7 +101,7 @@ class NovoJogoFragment : Fragment() {
 
     private fun createSpinner() {
         val spinner: Spinner = binding.tiposJogos
-        adapterSpinner(spinner, R.array.tipos_jogos)
+        adapterSpinner(spinner, R.array.add_jogos)
     }
     private fun adapterSpinner(spinner: Spinner, array:Int){
         ArrayAdapter.createFromResource(
