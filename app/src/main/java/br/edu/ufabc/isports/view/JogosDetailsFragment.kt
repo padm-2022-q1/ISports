@@ -13,10 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentJogosDetailsBinding
 import br.edu.ufabc.isports.databinding.ListParticipantesBinding
-import br.edu.ufabc.isports.model.Jogo
-import kotlin.reflect.KProperty1
-import kotlin.reflect.full.memberProperties
-import br.edu.ufabc.isports.model.Participantes
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 

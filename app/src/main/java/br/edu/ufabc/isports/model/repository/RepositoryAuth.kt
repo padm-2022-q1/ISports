@@ -1,4 +1,4 @@
-package br.edu.ufabc.isports.model
+package br.edu.ufabc.isports.model.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await

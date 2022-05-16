@@ -1,4 +1,4 @@
-package br.edu.ufabc.isports.model
+package br.edu.ufabc.isports.model.objects
 
 data class Usuario(
     var id: String,

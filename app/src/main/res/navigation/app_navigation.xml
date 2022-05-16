@@ -126,7 +126,7 @@
         tools:layout="@layout/fragment_jogos_details" >
         <argument
             android:name="jogoItem"
-            app:argType="br.edu.ufabc.isports.model.Jogo"
+            app:argType="br.edu.ufabc.isports.model.objects.Jogo"
             app:nullable="true" />
         <action
             android:id="@+id/action_jogosDetailsFragment_to_explorarFragment"

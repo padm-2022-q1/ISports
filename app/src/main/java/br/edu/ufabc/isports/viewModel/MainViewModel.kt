@@ -4,7 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import br.edu.ufabc.isports.model.*
+import br.edu.ufabc.isports.model.objects.Jogo
+import br.edu.ufabc.isports.model.objects.Usuario
+import br.edu.ufabc.isports.model.repository.RepositoryAuth
+import br.edu.ufabc.isports.model.repository.RepositoryFirestore
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.*
 import java.lang.Exception
@@ -118,10 +121,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun addJogo(jogoFirestore: JogoFirestore) = liveData {
+    fun addJogo(jogo: Jogo) = liveData {
         try {
             emit(Status.Loading)
-            emit(Status.Success(Result.AddJogo(repositoryFirestore.addJogo(jogoFirestore))))
+            emit(Status.Success(Result.AddJogo(repositoryFirestore.addJogo(jogo))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failet to add element", e)))
         }

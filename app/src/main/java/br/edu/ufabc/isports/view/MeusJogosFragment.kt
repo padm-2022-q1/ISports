@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentMeusJogosBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
-import br.edu.ufabc.isports.model.Jogo
+import br.edu.ufabc.isports.model.objects.Jogo
 import br.edu.ufabc.isports.viewModel.MainViewModel
 
 class MeusJogosFragment : Fragment() {

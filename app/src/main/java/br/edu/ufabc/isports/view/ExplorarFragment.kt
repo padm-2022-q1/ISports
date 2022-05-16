@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,7 @@ import br.edu.ufabc.isports.viewModel.MainViewModel
 import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
-import br.edu.ufabc.isports.model.Jogo
+import br.edu.ufabc.isports.model.objects.Jogo
 import java.text.SimpleDateFormat
 import java.util.*
 
