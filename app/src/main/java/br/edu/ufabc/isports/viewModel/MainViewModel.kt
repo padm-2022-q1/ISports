@@ -19,7 +19,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val value: Usuario?
         ) : Result()
         data class AddJogo(
-            val value: Boolean
+            val value: Void?
         ) : Result()
         data class AddParticipante(
             val value: Void?
@@ -121,7 +121,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addJogo(jogoFirestore: JogoFirestore) = liveData {
         try {
             emit(Status.Loading)
-            emit(Status.Success(Result.AddJogo(repositoryFirestore.addJogo(jogoFirestore).isSuccessful)))
+            emit(Status.Success(Result.AddJogo(repositoryFirestore.addJogo(jogoFirestore))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failet to add element", e)))
         }

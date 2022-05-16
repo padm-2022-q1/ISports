@@ -17,6 +17,7 @@ class RepositoryFirestore {
         private const val usuarioCollection = "Usuarios"
 
         private object JogoDoc {
+            const val  id = "id"
             const val modalidade = "modalidade"
             const val inicio = "inicio"
             const val fim = "fim"
@@ -32,8 +33,11 @@ class RepositoryFirestore {
     private fun getJogosCollection() = db.collection(jogosCollection)
     private fun getUsuariosCollection() = db.collection(usuarioCollection)
 
-    fun addJogo(jogoFirestore: JogoFirestore) =
-        getJogosCollection().add(jogoFirestore)
+    suspend fun addJogo(jogoFirestore: JogoFirestore) : Void? {
+        getJogosCollection().add(jogoFirestore).await().let { doc ->
+            return doc.update(JogoDoc.id, doc.id).await()
+        }
+    }
 
     suspend fun getJogosExplorar(modalidade: String, uid: String): List<Jogo> {
         val list: MutableList<Jogo> = mutableListOf()
