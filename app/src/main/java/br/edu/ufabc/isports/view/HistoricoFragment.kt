@@ -1,5 +1,6 @@
 package br.edu.ufabc.isports.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import br.edu.ufabc.isports.databinding.FragmentMeusJogosBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
 import br.edu.ufabc.isports.model.objects.Jogo
 import br.edu.ufabc.isports.viewModel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class HistoricoFragment : Fragment() {
     private lateinit var binding: FragmentMeusJogosBinding
@@ -144,6 +146,12 @@ class HistoricoFragment : Fragment() {
                             }
                         }
                     }
+                }
+                is MainViewModel.Status.Failure -> {
+                    Snackbar.make(binding.root, status.e.message.toString(), Snackbar.LENGTH_SHORT)
+                        .setBackgroundTint(Color.GRAY)
+                        .setTextColor(Color.BLACK)
+                        .show()
                 }
                 else -> {}
             }

@@ -2,6 +2,7 @@ package br.edu.ufabc.isports.view
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import br.edu.ufabc.isports.databinding.FragmentNovoJogoBinding
 import br.edu.ufabc.isports.model.objects.Jogo
 import br.edu.ufabc.isports.model.objects.Participante
 import br.edu.ufabc.isports.viewModel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -89,7 +91,13 @@ class NovoJogoFragment : Fragment() {
                             is MainViewModel.Status.Success -> {
                                 findNavController().navigate(R.id.action_novoJogoFragment_to_explorarFragment)
                             }
-                            else -> { }
+                            is MainViewModel.Status.Failure -> {
+                                progressBar.stop()
+                                Snackbar.make(binding.root, status.e.message.toString(), Snackbar.LENGTH_SHORT)
+                                    .setBackgroundTint(Color.GRAY)
+                                    .setTextColor(Color.BLACK)
+                                    .show()
+                            }
                         }
                     }
                 }

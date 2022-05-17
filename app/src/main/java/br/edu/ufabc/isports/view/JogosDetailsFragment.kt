@@ -110,6 +110,12 @@ class JogosDetailsFragment : Fragment() {
                                 .setTextColor(Color.BLACK)
                                 .show()
                         }
+                        is MainViewModel.Status.Failure -> {
+                            Snackbar.make(binding.root, status.e.message.toString(), Snackbar.LENGTH_SHORT)
+                                .setBackgroundTint(Color.GRAY)
+                                .setTextColor(Color.BLACK)
+                                .show()
+                        }
                         else -> { }
                     }
                 }
