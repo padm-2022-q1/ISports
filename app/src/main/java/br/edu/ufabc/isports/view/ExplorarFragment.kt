@@ -170,25 +170,6 @@ class ExplorarFragment : Fragment() {
         val spinner: Spinner = binding.tiposJogos
         adapterSpinner(spinner, R.array.tipos_jogos)
     }
-    private fun reset(){
-        binding.swipeRefreshLayout.isRefreshing = true
-        viewModel.getJogosExplorar(binding.tiposJogos.selectedItem.toString()).observe(viewLifecycleOwner) { status ->
-            when(status) {
-                is MainViewModel.Status.Success -> {
-                    (status.result as MainViewModel.Result.GetJogos).value.let{
-                        if(it.isEmpty()){
-                            binding.explorarMatchNotFoundTextView.visibility = View.VISIBLE
-                        } else{
-                            binding.recyclerviewJogos.apply {
-                                adapter = ContactAdapter(it)
-                            }
-                        }
-                    }
-                }
-                else -> {}
-            }
-        }
-    }
 
     private fun bindEvents()
     {
@@ -207,7 +188,14 @@ class ExplorarFragment : Fragment() {
             true
         }
         binding.explorarFiltrarButton.setOnClickListener {
-            viewModel.getJogosExplorar(binding.tiposJogos.selectedItem.toString()).observe(viewLifecycleOwner) { status ->
+            binding.recyclerviewJogos.apply {
+                adapter = ContactAdapter(emptyList())
+            }
+            viewModel.getJogosExplorar(
+                binding.tiposJogos.selectedItem.toString(),
+                binding.explorarDataDe.text.toString(),
+                binding.explorarDataAte.text.toString()
+            ).observe(viewLifecycleOwner) { status ->
                 when(status) {
                     is MainViewModel.Status.Success -> {
                         (status.result as MainViewModel.Result.GetJogos).value.let{
@@ -234,16 +222,6 @@ class ExplorarFragment : Fragment() {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            if(filtrado){
-                reset()
-            }
-            binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 }

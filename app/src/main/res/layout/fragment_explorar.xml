@@ -163,26 +163,23 @@
         android:text="@string/explorar_filtrar_button_text"
         android:textColor="#263238"
         tools:ignore="TextContrastCheck" />
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/bottom_navigation_explorar"
-        android:layout_below="@id/explorar_filtrar_button">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_jogos"
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/explorar_filtrar_button" />
-    </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_above="@id/bottom_navigation_explorar"
+            android:layout_below="@id/explorar_filtrar_button">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_jogos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/explorar_filtrar_button" />
+        </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_jogo"

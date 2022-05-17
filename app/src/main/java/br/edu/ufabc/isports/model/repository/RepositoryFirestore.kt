@@ -7,6 +7,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
@@ -39,18 +40,26 @@ class RepositoryFirestore {
         }
     }
 
-    suspend fun getJogosExplorar(modalidade: String, uid: String): List<Jogo> {
+    suspend fun getJogosExplorar(modalidade: String, uid: String, dtDe: String, dtAte: String): List<Jogo> {
+        val hoje = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant())
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val query = when(modalidade) {
             "Todos" -> getJogosCollection()
             else -> getJogosCollection()
                 .whereEqualTo(JogoDoc.modalidade, modalidade)
         }
         return query
+            .whereGreaterThan(JogoDoc.inicio, hoje)
+            .orderBy(JogoDoc.inicio)
             .get()
             .await()
             .toObjects(JogoDTO::class.java)
             .map { it.toJogo() }
-            .filter { jogo -> !jogo.participantes.any { participante -> participante.uid == uid } }
+            .filter { jogo ->
+                !jogo.participantes.any { participante -> participante.uid == uid } &&
+                        (dtDe.isEmpty() || sdf.parse(dtDe)!! <= jogo.inicio) &&
+                        (dtAte.isEmpty() || sdf.parse(sdf.format(jogo.inicio))!! <= sdf.parse(dtAte)!!)
+            }
     }
 
     suspend fun getMeusJogos(uid: String, username: String): List<Jogo> {
