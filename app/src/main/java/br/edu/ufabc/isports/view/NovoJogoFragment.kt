@@ -41,6 +41,32 @@ class NovoJogoFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_save -> {
+
+                if( binding.newGameData.text.isNullOrEmpty() ||
+                    binding.newGameTimeDe.text.isNullOrEmpty() ||
+                    binding.newGameTimeAte.text.isNullOrEmpty() ||
+                    binding.cadastroEndereco.text.isNullOrEmpty()
+                ) {
+
+                    if(binding.newGameData.text.isNullOrEmpty()) {
+                        binding.newGameData.error = "Required field"
+                    }
+
+                    if(binding.newGameTimeDe.text.isNullOrEmpty()) {
+                        binding.newGameTimeDe.error = "Required field"
+                    }
+
+                    if(binding.newGameTimeAte.text.isNullOrEmpty()) {
+                        binding.newGameTimeAte.error = "Required field"
+                    }
+
+                    if(binding.cadastroEndereco.text.isNullOrEmpty()) {
+                        binding.cadastroEndereco.error = "Required field"
+                    }
+
+                    return  true
+                }
+
                 val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                 val list = mutableListOf<Participante>()
                 list.add(Participante(viewModel.usuario.id, viewModel.usuario.username))
