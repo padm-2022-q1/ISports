@@ -111,8 +111,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         try {
             emit(Status.Loading)
             repositoryAuth.getUsuarioLogado()?.let{ user ->
-                val name = repositoryFirestore.getUsername(user.uid)
-                usuario = Usuario(user.uid, user.email!!, name)
+                val username = repositoryFirestore.getUsername(user.uid)
+                val meusJogos = repositoryFirestore.getMeusJogos(user.uid, username)
+                val historico = repositoryFirestore.getHistorico(user.uid, username)
+                usuario = Usuario(user.uid, user.email!!, username, meusJogos, historico)
                 emit(Status.Success(Result.SetUsuario(usuario)))
             }
             emit(Status.Success(Result.SetUsuario(null)))

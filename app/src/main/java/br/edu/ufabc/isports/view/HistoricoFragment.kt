@@ -136,6 +136,7 @@ class HistoricoFragment : Fragment() {
                             binding.meusJogosMatchNotFoundTextView.visibility = View.VISIBLE
                         } else{
                             binding.recyclerviewMeusJogos.apply {
+                                viewModel.usuario.historico = it
                                 adapter = ContactAdapter(it)
                             }
                         }
@@ -148,7 +149,9 @@ class HistoricoFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        reset()
+        binding.recyclerviewMeusJogos.apply {
+            adapter = ContactAdapter(viewModel.usuario.historico)
+        }
         binding.swipeRefreshLayout.setOnRefreshListener {
             reset()
         }

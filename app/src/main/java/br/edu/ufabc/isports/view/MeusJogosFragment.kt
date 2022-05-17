@@ -116,6 +116,7 @@ class MeusJogosFragment : Fragment() {
                             binding.meusJogosMatchNotFoundTextView.visibility = View.VISIBLE
                         } else{
                             binding.recyclerviewMeusJogos.apply {
+                                viewModel.usuario.meusJogos = it
                                 adapter = ContactAdapter(it)
                             }
                         }
@@ -129,7 +130,9 @@ class MeusJogosFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        reset()
+        binding.recyclerviewMeusJogos.apply {
+            adapter = ContactAdapter(viewModel.usuario.meusJogos)
+        }
         binding.swipeRefreshLayout.setOnRefreshListener {
             reset()
         }
