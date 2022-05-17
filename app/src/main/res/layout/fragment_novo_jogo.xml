@@ -18,60 +18,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/new_game_data"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_dateDe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="@string/data_text"
-        android:gravity="center"
-        android:padding="15dp"
-        android:background="@color/grey_tint_50"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/tipos_jogos"
-        app:layout_constraintTop_toBottomOf="@+id/tipos_jogos" />
+        app:layout_constraintTop_toBottomOf="@+id/tipos_jogos"
+        android:hint="@string/data_text">
 
-    <TextView
-        android:id="@+id/new_game_time_De"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_game_data"
+            android:layout_width="match_parent"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_horaDe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:background="@color/grey_tint_50"
-        android:padding="20dp"
-        android:gravity="center"
-        android:text="@string/explorar_hora_de_text_default"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/new_game_time_Ate"
+        app:layout_constraintEnd_toStartOf="@+id/textField_horaAte"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_game_data" />
+        app:layout_constraintTop_toBottomOf="@+id/textField_dateDe"
+        android:hint="@string/explorar_hora_de_text_default">
 
-    <TextView
-        android:id="@+id/new_game_time_Ate"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_game_time_De"
+            android:layout_width="match_parent"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_horaAte"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:background="@color/grey_tint_50"
-        android:padding="20dp"
-        android:gravity="center"
-        android:text="@string/explorar_hora_ate_text_default"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/new_game_data"
-        app:layout_constraintTop_toBottomOf="@+id/new_game_data" />
+        app:layout_constraintEnd_toEndOf="@+id/textField_dateDe"
+        app:layout_constraintTop_toBottomOf="@+id/textField_dateDe"
+        android:hint="@string/explorar_hora_ate_text_default">
 
-    <EditText
-        android:id="@+id/cadastro_endereco"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_game_time_Ate"
+            android:layout_width="match_parent"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_endereco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="@string/signup_address_hint"
-        android:padding="20dp"
-        android:background="@color/grey_tint_50"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:inputType="textPostalAddress"
-        android:autofillHints="postalAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_game_time_Ate" />
+        app:layout_constraintTop_toBottomOf="@+id/textField_horaAte"
+        android:hint="@string/signup_address_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cadastro_endereco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            android:autofillHints="postalAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

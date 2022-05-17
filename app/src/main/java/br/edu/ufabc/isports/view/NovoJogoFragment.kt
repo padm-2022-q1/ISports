@@ -67,11 +67,11 @@ class NovoJogoFragment : Fragment() {
 
     private fun createTime() {
         val timeDialogDe = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-            binding.newGameTimeDe.text= String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+            binding.newGameTimeDe.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
         }
 
         val timeDialogAte = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-            binding.newGameTimeAte.text= String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+            binding.newGameTimeAte.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
         }
         binding.newGameTimeDe.setOnClickListener {
             TimePickerDialog(it.context, timeDialogDe, 0, 0, true).show()
@@ -89,7 +89,7 @@ class NovoJogoFragment : Fragment() {
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, month)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMouth)
-            binding.newGameData.text = sdf.format(myCalendar.time)
+            binding.newGameData.setText(sdf.format(myCalendar.time))
         }
 
         binding.newGameData.setOnClickListener{
