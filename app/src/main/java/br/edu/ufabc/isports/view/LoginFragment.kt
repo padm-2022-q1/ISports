@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 class LoginFragment : Fragment(){
     private lateinit var  binding: FragmentLoginBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +26,11 @@ class LoginFragment : Fragment(){
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = ProgressBar(binding.progressHorizontal)
     }
 
     override fun onStart() {
@@ -45,6 +51,7 @@ class LoginFragment : Fragment(){
             } else{
                 viewModel.logar(email, password).observe(viewLifecycleOwner) { status ->
                     when(status) {
+                        is MainViewModel.Status.Loading -> progressBar.start()
                         is MainViewModel.Status.Success -> {
                             viewModel.setUsuario().observe(viewLifecycleOwner) {
                                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
@@ -55,12 +62,12 @@ class LoginFragment : Fragment(){
                             }
                         }
                         is MainViewModel.Status.Failure -> {
+                            progressBar.stop()
                             Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
                         }
-                        else -> { }
                     }
                 }
             }

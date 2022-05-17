@@ -7,6 +7,16 @@
     android:background="@color/black_tint_30"
     tools:context=".view.NovoJogoFragment">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:indeterminate="true"
+        app:indicatorColor="@color/black"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <Spinner
         android:id="@+id/tipos_jogos"
         android:layout_width="match_parent"

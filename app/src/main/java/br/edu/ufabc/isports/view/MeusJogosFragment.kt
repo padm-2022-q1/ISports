@@ -108,6 +108,9 @@ class MeusJogosFragment : Fragment() {
 
     private fun reset(){
         binding.swipeRefreshLayout.isRefreshing = true
+        binding.recyclerviewMeusJogos.apply {
+            adapter = ContactAdapter(emptyList())
+        }
         viewModel.getMeusJogos().observe(viewLifecycleOwner) { status ->
             when(status) {
                 is MainViewModel.Status.Success -> {

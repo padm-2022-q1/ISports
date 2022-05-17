@@ -200,12 +200,16 @@ class ExplorarFragment : Fragment() {
             ).observe(viewLifecycleOwner) { status ->
                 when(status) {
                     is MainViewModel.Status.Success -> {
+                        //desativar o circular progress bar
                         (status.result as MainViewModel.Result.GetJogos).value.let{
                             binding.recyclerviewJogos.apply {
                                 filtrado=true
                                 adapter = ContactAdapter(it)
                             }
                         }
+                    }
+                    is MainViewModel.Status.Loading -> {
+                        //ativar o circular progress bar
                     }
                     else -> {}
                 }

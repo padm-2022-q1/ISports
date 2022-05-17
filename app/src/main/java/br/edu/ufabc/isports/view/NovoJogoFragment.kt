@@ -20,6 +20,7 @@ import java.util.*
 class NovoJogoFragment : Fragment() {
     private lateinit var binding: FragmentNovoJogoBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +33,11 @@ class NovoJogoFragment : Fragment() {
         createDate()
         createTime()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = ProgressBar(binding.progressHorizontal)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -79,6 +85,7 @@ class NovoJogoFragment : Fragment() {
                 ).let { jogo ->
                     viewModel.addJogo(jogo).observe(viewLifecycleOwner) { status ->
                         when(status) {
+                            is MainViewModel.Status.Loading -> progressBar.start()
                             is MainViewModel.Status.Success -> {
                                 findNavController().navigate(R.id.action_novoJogoFragment_to_explorarFragment)
                             }

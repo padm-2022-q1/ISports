@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 class PerfilFragment : Fragment() {
     private lateinit var binding: FragmentPerfilBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +25,11 @@ class PerfilFragment : Fragment() {
     ): View {
         binding = FragmentPerfilBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = ProgressBar(binding.progressHorizontal)
     }
 
     override fun onStart() {
@@ -46,23 +52,26 @@ class PerfilFragment : Fragment() {
         binding.alterarCadastroButton.setOnClickListener { view ->
             viewModel.recuperarSenha().observe(viewLifecycleOwner) { status ->
                 when(status) {
+                    is MainViewModel.Status.Loading -> progressBar.start()
                     is MainViewModel.Status.Success -> {
+                        progressBar.stop()
                         Snackbar.make(view, "Verifique sua caixa de email", Snackbar.LENGTH_SHORT)
                             .setBackgroundTint(Color.GRAY)
                             .setTextColor(Color.BLACK)
                             .show()
                     }
                     is MainViewModel.Status.Failure -> {
+                        progressBar.stop()
                         Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                             .setBackgroundTint(Color.GRAY)
                             .setTextColor(Color.BLACK)
                             .show()
                     }
-                    else -> { }
                 }
             }
         }
         binding.logoutButton.setOnClickListener {
+            progressBar.start()
             viewModel.singOut()
             findNavController().navigate(R.id.action_perfilFragment_to_loginFragment)
         }

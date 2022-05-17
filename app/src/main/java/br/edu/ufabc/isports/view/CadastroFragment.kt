@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 class CadastroFragment : Fragment() {
     private lateinit var binding: FragmentCadastroBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +26,11 @@ class CadastroFragment : Fragment() {
     ): View {
         binding = FragmentCadastroBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = ProgressBar(binding.progressHorizontal)
     }
 
     override fun onStart() {
@@ -54,22 +60,29 @@ class CadastroFragment : Fragment() {
             } else{
                 viewModel.createUsuario(email, password, username).observe(viewLifecycleOwner) { status ->
                     when(status) {
+                        is MainViewModel.Status.Loading -> progressBar.start()
                         is MainViewModel.Status.Success -> {
-                            viewModel.setUsuario().observe(viewLifecycleOwner) {
-                                findNavController().navigate(CadastroFragmentDirections.actionCadastroFragmentToMeusJogosFragment(), navOptions {
-                                    popUpTo(findNavController().graph.startDestinationId){
-                                        inclusive=true
+                            viewModel.setUsuario().observe(viewLifecycleOwner) { login ->
+                                when(login){
+                                    is MainViewModel.Status.Success -> {
+                                        findNavController().navigate(CadastroFragmentDirections.actionCadastroFragmentToMeusJogosFragment(), navOptions {
+                                            popUpTo(findNavController().graph.startDestinationId){
+                                                inclusive=true
+                                            }
+                                        })
                                     }
-                                })
+                                    else -> { }
+                                }
+
                             }
                         }
                         is MainViewModel.Status.Failure -> {
+                            progressBar.stop()
                             Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
                         }
-                        else -> { }
                     }
 
                 }

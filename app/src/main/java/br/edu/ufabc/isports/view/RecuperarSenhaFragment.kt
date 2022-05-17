@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 class RecuperarSenhaFragment : Fragment(){
     private lateinit var  binding: FragmentRecuperarSenhaBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +25,11 @@ class RecuperarSenhaFragment : Fragment(){
     ): View {
         binding = FragmentRecuperarSenhaBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = ProgressBar(binding.progressHorizontal)
     }
 
     override fun onStart() {
@@ -45,6 +51,7 @@ class RecuperarSenhaFragment : Fragment(){
             } else{
                 viewModel.recuperarSenha(email).observe(viewLifecycleOwner) { status ->
                     when (status) {
+                        is MainViewModel.Status.Loading -> progressBar.start()
                         is MainViewModel.Status.Success -> {
                             Snackbar.make( view, "Verifique sua caixa de email", Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(Color.GRAY)
@@ -53,12 +60,12 @@ class RecuperarSenhaFragment : Fragment(){
                             findNavController().navigate(R.id.action_recuperarSenhaFragment_to_loginFragment)
                         }
                         is MainViewModel.Status.Failure -> {
+                            progressBar.stop()
                             Snackbar.make(view, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
                         }
-                        else -> {}
                     }
                 }
             }
