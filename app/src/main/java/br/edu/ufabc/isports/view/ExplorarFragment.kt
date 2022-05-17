@@ -194,7 +194,9 @@ class ExplorarFragment : Fragment() {
             viewModel.getJogosExplorar(
                 binding.tiposJogos.selectedItem.toString(),
                 binding.explorarDataDe.text.toString(),
-                binding.explorarDataAte.text.toString()
+                binding.explorarDataAte.text.toString(),
+                binding.explorarTimeDe.text.toString(),
+                binding.explorarTimeAte.text.toString()
             ).observe(viewLifecycleOwner) { status ->
                 when(status) {
                     is MainViewModel.Status.Success -> {

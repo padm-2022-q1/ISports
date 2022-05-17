@@ -153,14 +153,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getJogosExplorar(modalidade: String, dtDe: String, dtAte: String) = liveData {
+    fun getJogosExplorar(modalidade: String, dtDe: String, dtAte: String, hrDe: String, hrAte: String) = liveData {
         try {
             emit(Status.Loading)
             emit(Status.Success(Result.GetJogos(repositoryFirestore.getJogosExplorar(
                 modalidade,
                 usuario.id,
                 dtDe,
-                dtAte
+                dtAte,
+                hrDe,
+                hrAte
             ))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failet to get element", e)))
