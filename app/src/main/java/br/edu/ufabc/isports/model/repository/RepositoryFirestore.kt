@@ -81,6 +81,10 @@ class RepositoryFirestore {
         .update(JogoDoc.participantes, FieldValue.arrayUnion(Participante(userId, username)))
         .await()
 
+    suspend fun  removeParticipante(uid: String, userId: String, username: String): Void? = getJogosCollection().document(uid)
+        .update(JogoDoc.participantes, FieldValue.arrayRemove(Participante(userId, username)))
+        .await()
+
     suspend fun setUsername(uid: String, username: String): Void? = getUsuariosCollection()
         .document(uid)
         .set(mapOf("username" to username))

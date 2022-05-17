@@ -27,6 +27,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         data class AddParticipante(
             val value: Void?
         ) : Result()
+        data class RemoveParticipante(
+            val value: Void?
+        ) : Result()
         data class GetJogos(
             val value: List<Jogo>
         ) : Result()
@@ -136,6 +139,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         try{
             emit(Status.Loading)
             emit(Status.Success(Result.AddParticipante(repositoryFirestore.addParticipante(uid, usuario.id, usuario.username))))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failet to update element", e)))
+        }
+    }
+
+    fun removeParticipante(uid: String) = liveData {
+        try{
+            emit(Status.Loading)
+            emit(Status.Success(Result.RemoveParticipante(repositoryFirestore.removeParticipante(uid, usuario.id, usuario.username))))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failet to update element", e)))
         }
