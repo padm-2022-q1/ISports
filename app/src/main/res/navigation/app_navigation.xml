@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/esperarFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="br.edu.ufabc.isports.view.LoginFragment"
@@ -131,5 +131,16 @@
         <action
             android:id="@+id/action_jogosDetailsFragment_to_explorarFragment"
             app:destination="@id/explorarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/esperarFragment"
+        android:name="br.edu.ufabc.isports.view.EsperarFragment"
+        android:label="EsperarFragment" >
+        <action
+            android:id="@+id/action_esperarFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_esperarFragment_to_meusJogosFragment"
+            app:destination="@id/meusJogosFragment" />
     </fragment>
 </navigation>

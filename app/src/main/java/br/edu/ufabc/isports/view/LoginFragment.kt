@@ -29,25 +29,7 @@ class LoginFragment : Fragment(){
 
     override fun onStart() {
         super.onStart()
-        activity?.let {
-            viewModel.setUsuario().observe(viewLifecycleOwner) { status ->
-                when(status){
-                    is MainViewModel.Status.Success -> {
-                        (status.result as MainViewModel.Result.SetUsuario).value.let {
-                            if(it != null){
-                                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
-                                    popUpTo(findNavController().graph.startDestinationId){
-                                        inclusive=true
-                                    }
-                                })
-                            }
-                        }
-                    }
-                    else -> { }
-                }
-            }
-            bindEvents()
-        }
+        bindEvents()
     }
 
     private fun bindEvents() {
@@ -66,7 +48,7 @@ class LoginFragment : Fragment(){
                         is MainViewModel.Status.Success -> {
                             viewModel.setUsuario().observe(viewLifecycleOwner) {
                                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMeusJogosFragment(), navOptions {
-                                    popUpTo(findNavController().graph.startDestinationId){
+                                    popUpTo(R.id.loginFragment){
                                         inclusive=true
                                     }
                                 })
