@@ -72,71 +72,96 @@
         app:menu="@menu/bottom_navigation_menu"
         android:layout_alignParentBottom="true"/>
 
-    <TextView
-        android:id="@+id/explorar_data_de"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_dateDe"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/slider_distancia"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_toStartOf="@id/explorar_data_ate"
-        android:background="@color/grey_tint_50"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="@string/explorar_date_de_text_default"
-        android:textColor="@color/black" />
+        android:layout_toStartOf="@+id/textField_dateAte"
+        android:hint="@string/explorar_date_de_text_default">
 
-    <TextView
-        android:id="@+id/explorar_data_ate"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/explorar_data_de"
+            android:layout_width="match_parent"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:layout_marginEnd="15dp"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_dateAte"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:padding="20dp"
-        android:background="@color/grey_tint_50"
-        android:gravity="center"
-        android:text="@string/explorar_date_ate_text_default"
-        android:textColor="@color/black"
         android:layout_below="@id/slider_distancia"
-        android:layout_alignEnd="@id/slider_distancia"/>
+        android:layout_alignEnd="@id/slider_distancia"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:hint="@string/explorar_date_ate_text_default"
+        android:textColor="@color/black">
 
-    <TextView
-        android:id="@+id/explorar_time_de"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/explorar_data_ate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:cursorVisible="false"
+            android:focusable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_timeDe"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/explorar_data_ate"
+        android:layout_below="@+id/textField_dateAte"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_toStartOf="@id/explorar_time_Ate"
-        android:background="@color/grey_tint_50"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="@string/explorar_hora_de_text_default"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/explorar_time_Ate"
-        app:layout_constraintStart_toStartOf="@+id/explorar_data_de"
-        app:layout_constraintTop_toBottomOf="@+id/explorar_data_de" />
+        android:layout_toStartOf="@id/textField_timeAte"
+        android:hint="@string/explorar_hora_de_text_default"
+        android:textColor="@color/black">
 
-    <TextView
-        android:id="@+id/explorar_time_Ate"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/explorar_time_de"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:cursorVisible="false"
+            android:focusable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_timeAte"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/explorar_data_ate"
+        android:layout_below="@+id/textField_dateAte"
         android:layout_alignEnd="@id/slider_distancia"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_tint_50"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="@string/explorar_hora_ate_text_default"
-        android:textColor="@color/black" />
+        android:hint="@string/explorar_hora_ate_text_default"
+        android:textColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/explorar_time_Ate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:cursorVisible="false"
+            android:focusable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/explorar_filtrar_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/explorar_time_Ate"
-        android:layout_alignEnd="@id/explorar_time_Ate"
+        android:layout_below="@id/textField_timeAte"
+        android:layout_alignEnd="@id/textField_timeAte"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/grey_tint_50"
         android:text="@string/explorar_filtrar_button_text"

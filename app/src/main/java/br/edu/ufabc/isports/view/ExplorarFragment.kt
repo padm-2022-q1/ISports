@@ -123,10 +123,10 @@ class ExplorarFragment : Fragment() {
 
     private fun createTime() {
         val timeDialogDe = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-            binding.explorarTimeDe.text = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+            binding.explorarTimeDe.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
         }
         val timeDialogAte = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-            binding.explorarTimeAte.text = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+            binding.explorarTimeAte.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
         }
         binding.explorarTimeDe.setOnClickListener {
             TimePickerDialog(it.context, timeDialogDe, 0, 0, true).show()
@@ -144,7 +144,7 @@ class ExplorarFragment : Fragment() {
             myCalendarDe.set(Calendar.YEAR, year)
             myCalendarDe.set(Calendar.MONTH, month)
             myCalendarDe.set(Calendar.DAY_OF_MONTH, dayOfMouth)
-            binding.explorarDataDe.text = sdf.format(myCalendarDe.time)
+            binding.explorarDataDe.setText(sdf.format(myCalendarDe.time))
         }
 
         val myCalendarAte = Calendar.getInstance()
@@ -152,7 +152,7 @@ class ExplorarFragment : Fragment() {
             myCalendarAte.set(Calendar.YEAR, year)
             myCalendarAte.set(Calendar.MONTH, month)
             myCalendarAte.set(Calendar.DAY_OF_MONTH, dayOfMouth)
-            binding.explorarDataAte.text = sdf.format(myCalendarAte.time)
+            binding.explorarDataAte.setText(sdf.format(myCalendarAte.time))
         }
 
         binding.explorarDataDe.setOnClickListener{
