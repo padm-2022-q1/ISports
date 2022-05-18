@@ -2,6 +2,7 @@ package br.edu.ufabc.isports.view
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.icu.util.UniversalTimeScale.toLong
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import br.edu.ufabc.isports.databinding.JogosListItemBinding
 import br.edu.ufabc.isports.model.objects.Jogo
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.time.Duration.Companion.milliseconds
 
 class ExplorarFragment : Fragment() {
     private lateinit var binding: FragmentExplorarBinding
@@ -143,12 +145,13 @@ class ExplorarFragment : Fragment() {
 
     private fun createDate() {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-
+        var dateade: Long=0
         val myCalendarDe = Calendar.getInstance()
         val datePickerDe = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMouth ->
             myCalendarDe.set(Calendar.YEAR, year)
             myCalendarDe.set(Calendar.MONTH, month)
             myCalendarDe.set(Calendar.DAY_OF_MONTH, dayOfMouth)
+            dateade = myCalendarDe.timeInMillis
             binding.explorarDataDe.setText(sdf.format(myCalendarDe.time))
         }
 
@@ -161,13 +164,15 @@ class ExplorarFragment : Fragment() {
         }
 
         binding.explorarDataDe.setOnClickListener{
-            DatePickerDialog(it.context, datePickerDe, myCalendarDe.get(Calendar.YEAR), myCalendarDe.get(Calendar.MONTH),
+                DatePickerDialog(it.context, datePickerDe, myCalendarDe.get(Calendar.YEAR), myCalendarDe.get(Calendar.MONTH),
                 myCalendarDe.get(Calendar.DAY_OF_MONTH)).show()
         }
 
         binding.explorarDataAte.setOnClickListener{
-            DatePickerDialog(it.context, datePickerAte, myCalendarAte.get(Calendar.YEAR), myCalendarAte.get(Calendar.MONTH),
-                myCalendarAte.get(Calendar.DAY_OF_MONTH)).show()
+            val dateate=DatePickerDialog(it.context, datePickerAte, myCalendarAte.get(Calendar.YEAR), myCalendarAte.get(Calendar.MONTH),
+                myCalendarAte.get(Calendar.DAY_OF_MONTH))
+            dateate.datePicker.minDate = dateade
+            dateate.show()
         }
     }
 
