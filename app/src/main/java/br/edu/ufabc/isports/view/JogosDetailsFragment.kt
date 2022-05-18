@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.isports.R
@@ -100,6 +101,8 @@ open class JogosDetailsFragment : Fragment() {
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
+                            viewModel.clickedItemId.value=null
+                            findNavController().navigateUp()
                         }
                         is MainViewModel.Status.Failure -> {
                             Snackbar.make(binding.root, status.e.message.toString(), Snackbar.LENGTH_SHORT)

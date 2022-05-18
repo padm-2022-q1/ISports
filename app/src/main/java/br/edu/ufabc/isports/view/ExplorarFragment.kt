@@ -25,6 +25,7 @@ import java.util.*
 class ExplorarFragment : Fragment() {
     private lateinit var binding: FragmentExplorarBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
 
     companion object{
         lateinit var modalidadesJogos: List<String>
@@ -103,6 +104,11 @@ class ExplorarFragment : Fragment() {
             super.onViewRecycled(holder)
             Log.d("APP", "Recycled holder at position ${holder.bindingAdapterPosition}")
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = ProgressBar(binding.progressHorizontal)
     }
 
 
@@ -200,6 +206,7 @@ class ExplorarFragment : Fragment() {
                 when(status) {
                     is MainViewModel.Status.Success -> {
                         //desativar o circular progress bar
+                        progressBar.stop()
                         (status.result as MainViewModel.Result.GetJogos).value.let{
                             binding.recyclerviewJogos.apply {
                                 adapter = ExplorarAdapter(it)
@@ -208,6 +215,7 @@ class ExplorarFragment : Fragment() {
                     }
                     is MainViewModel.Status.Loading -> {
                         //ativar o circular progress bar
+                        progressBar.start()
                     }
                     else -> {}
                 }

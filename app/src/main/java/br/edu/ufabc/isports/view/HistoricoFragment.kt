@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 class HistoricoFragment : Fragment() {
     private lateinit var binding: FragmentMeusJogosBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
     private inner class HistoricoAdapter(val historico: List<Jogo>) :
         RecyclerView.Adapter<HistoricoAdapter.HistoricoHolder>() {
 
@@ -108,6 +109,10 @@ class HistoricoFragment : Fragment() {
         bindEvents()
         return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = ProgressBar(binding.progressHorizontal)
+    }
     private fun bindEvents() {
         viewModel.clickedItemId.observe(viewLifecycleOwner){
             if(viewModel.clickedItemId.value!=null){
@@ -146,12 +151,17 @@ class HistoricoFragment : Fragment() {
                             }
                         }
                     }
+                    progressBar.stop()
                 }
                 is MainViewModel.Status.Failure -> {
                     Snackbar.make(binding.root, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                         .setBackgroundTint(Color.GRAY)
                         .setTextColor(Color.BLACK)
                         .show()
+                    progressBar.stop()
+                }
+                is MainViewModel.Status.Loading -> {
+                    progressBar.start()
                 }
                 else -> {}
             }

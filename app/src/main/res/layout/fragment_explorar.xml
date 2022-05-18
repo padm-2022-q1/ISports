@@ -23,35 +23,6 @@
         android:padding="20dp"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
-    <com.google.android.material.slider.Slider
-        android:id="@+id/slider_distancia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tipos_jogos"
-        android:layout_centerVertical="@id/dist_text_view"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        android:layout_toEndOf="@+id/dist_text_view"
-        android:background="@color/grey_tint_50"
-        android:contentDescription="@string/todo"
-        android:padding="20dp"
-        android:stepSize="1.0"
-        android:value="10.0"
-        android:valueFrom="0.0"
-        android:valueTo="100.0" />
-
-    <TextView
-        android:id="@+id/dist_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tipos_jogos"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="25dp"
-        android:text="@string/dis_text"
-        android:textColor="#81D4FA"
-        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/explorar_match_not_found_textView"
@@ -76,7 +47,7 @@
         android:id="@+id/textField_dateDe"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/slider_distancia"
+        android:layout_below="@id/tipos_jogos"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -96,8 +67,8 @@
         android:id="@+id/textField_dateAte"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/slider_distancia"
-        android:layout_alignEnd="@id/slider_distancia"
+        android:layout_below="@id/tipos_jogos"
+        android:layout_alignEnd="@id/tipos_jogos"
         android:layout_marginTop="15dp"
         android:gravity="center"
         android:hint="@string/explorar_date_ate_text_default"
@@ -138,7 +109,7 @@
         android:layout_width="183dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textField_dateAte"
-        android:layout_alignEnd="@id/slider_distancia"
+        android:layout_alignEnd="@id/tipos_jogos"
         android:layout_marginTop="15dp"
         android:hint="@string/explorar_hora_ate_text_default"
         android:textColor="@color/black">
@@ -163,8 +134,17 @@
         android:text="@string/explorar_filtrar_button_text"
         android:textColor="#263238"
         tools:ignore="TextContrastCheck" />
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_horizontal"
+        android:indeterminate="true"
+            android:layout_above="@id/scrollview"
+        app:indicatorColor="@color/white"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
         <ScrollView
+            android:id="@+id/scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/bottom_navigation_explorar"

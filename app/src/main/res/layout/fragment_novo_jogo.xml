@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:indeterminate="true"
-        app:indicatorColor="@color/black"
+        app:indicatorColor="@color/white"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

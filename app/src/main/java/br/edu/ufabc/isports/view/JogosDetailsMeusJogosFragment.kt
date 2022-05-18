@@ -3,6 +3,7 @@ package br.edu.ufabc.isports.view
 import android.graphics.Color
 import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -19,6 +20,8 @@ class JogosDetailsMeusJogosFragment : JogosDetailsFragment() {
                                 .setBackgroundTint(Color.GRAY)
                                 .setTextColor(Color.BLACK)
                                 .show()
+                            viewModel.clickedItemId.value=null
+                            findNavController().navigateUp()
                         }
                         is MainViewModel.Status.Failure -> {
                             Snackbar.make(binding.root, status.e.message.toString(), Snackbar.LENGTH_SHORT)

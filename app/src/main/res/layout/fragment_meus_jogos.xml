@@ -6,12 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".view.MeusJogosFragment"
     android:background="@color/black_tint_30">
-
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_horizontal"
+        android:indeterminate="true"
+        android:layout_alignParentTop="true"
+        app:indicatorColor="@color/white"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/progress_horizontal"
         android:layout_above="@id/bottom_navigation_jogos">
         <ScrollView
             android:layout_width="match_parent"

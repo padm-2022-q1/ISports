@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 class MeusJogosFragment : Fragment() {
     private lateinit var binding: FragmentMeusJogosBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
 
     private inner class JogosAdapter(val jogos: List<Jogo>) :
         RecyclerView.Adapter<JogosAdapter.JogosHolder>() {
@@ -108,6 +109,11 @@ class MeusJogosFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = ProgressBar(binding.progressHorizontal)
+    }
+
     private fun reset(){
         binding.swipeRefreshLayout.isRefreshing = true
         binding.recyclerviewMeusJogos.apply {
@@ -126,12 +132,17 @@ class MeusJogosFragment : Fragment() {
                             }
                         }
                     }
+                    progressBar.stop()
                 }
                 is MainViewModel.Status.Failure -> {
                     Snackbar.make(binding.root, status.e.message.toString(), Snackbar.LENGTH_SHORT)
                         .setBackgroundTint(Color.GRAY)
                         .setTextColor(Color.BLACK)
                         .show()
+                    progressBar.stop()
+                }
+                is MainViewModel.Status.Loading -> {
+                    progressBar.start()
                 }
                 else -> {}
             }
