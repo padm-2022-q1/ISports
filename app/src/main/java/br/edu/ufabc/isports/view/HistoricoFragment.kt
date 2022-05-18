@@ -111,7 +111,7 @@ class HistoricoFragment : Fragment() {
     private fun bindEvents() {
         viewModel.clickedItemId.observe(viewLifecycleOwner){
             if(viewModel.clickedItemId.value!=null){
-                findNavController().navigate(HistoricoFragmentDirections.onClickItemHistorico(it), navOptions {
+                findNavController().navigate(HistoricoFragmentDirections.detailsHistoricoItem(it), navOptions {
                     popUpTo(R.id.historicoFragment)
                 })
             }

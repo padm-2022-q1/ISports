@@ -79,8 +79,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:textAlignment="center"
         android:layout_centerHorizontal="true"
         android:text="@string/fab_participar_text"
+        android:contentDescription="@string/fab_historic_description"
+        android:layout_alignParentBottom="true" />
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_sair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:textAlignment="center"
+        android:text="@string/text_sair"
+        android:visibility="invisible"
         android:contentDescription="@string/fab_historic_description"
         android:layout_alignParentBottom="true" />
 

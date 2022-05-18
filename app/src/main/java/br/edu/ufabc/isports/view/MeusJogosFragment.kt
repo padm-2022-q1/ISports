@@ -151,7 +151,7 @@ class MeusJogosFragment : Fragment() {
     private fun bindEvents() {
         viewModel.clickedItemId.observe(viewLifecycleOwner){
             if(viewModel.clickedItemId.value!=null){
-                findNavController().navigate(MeusJogosFragmentDirections.onClickItemMeusJogos(it), navOptions {
+                findNavController().navigate(MeusJogosFragmentDirections.detailsMeusJogos(it), navOptions {
                     popUpTo(R.id.meusJogosFragment)
                 })
             }

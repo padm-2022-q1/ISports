@@ -17,11 +17,11 @@ import br.edu.ufabc.isports.model.objects.Participante
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class JogosDetailsFragment : Fragment() {
+open class JogosDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentJogosDetailsBinding
-    private val args: JogosDetailsFragmentArgs by navArgs()
-    private val viewModel: MainViewModel by activityViewModels()
+    lateinit var binding: FragmentJogosDetailsBinding
+    val args: JogosDetailsFragmentArgs by navArgs()
+    val viewModel: MainViewModel by activityViewModels()
 
     private inner class ParticipantesAdapater(val participantes: List<Participante>) :
         RecyclerView.Adapter<ParticipantesAdapater.ParticipantesHolder>() {
@@ -77,7 +77,17 @@ class JogosDetailsFragment : Fragment() {
         binding = FragmentJogosDetailsBinding.inflate(inflater, container, false)
         initTexts()
         bindEvents()
+        removePlayer()
+        unshow()
         return binding.root
+    }
+
+    open fun removePlayer(){
+
+    }
+
+    open fun unshow(){
+
     }
 
     private fun bindEvents() {
