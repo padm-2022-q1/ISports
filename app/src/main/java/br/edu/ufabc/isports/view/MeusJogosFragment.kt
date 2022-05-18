@@ -22,11 +22,11 @@ class MeusJogosFragment : Fragment() {
     private lateinit var binding: FragmentMeusJogosBinding
     private val viewModel: MainViewModel by activityViewModels()
 
-    private inner class ContactAdapter(val contacts: List<Jogo>) :
-        RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
+    private inner class JogosAdapter(val jogos: List<Jogo>) :
+        RecyclerView.Adapter<JogosAdapter.JogosHolder>() {
 
 
-        private inner class ContactHolder(itemBinding: JogosListItemBinding) :
+        private inner class JogosHolder(itemBinding: JogosListItemBinding) :
             RecyclerView.ViewHolder(itemBinding.root) {
 
             val modalidade = itemBinding.jogosListModalidade
@@ -36,7 +36,7 @@ class MeusJogosFragment : Fragment() {
             val icon = itemBinding.notesListFavorites
             init {
                 itemBinding.root.setOnClickListener {
-                    viewModel.clickedItemId.value = contacts[bindingAdapterPosition]
+                    viewModel.clickedItemId.value = jogos[bindingAdapterPosition]
                 }
 
             }
@@ -48,8 +48,8 @@ class MeusJogosFragment : Fragment() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): ContactHolder =
-            ContactHolder(
+        ): JogosHolder =
+            JogosHolder(
                 JogosListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -74,8 +74,8 @@ class MeusJogosFragment : Fragment() {
         /**
          * Populate a view holder with data.
          */
-        override fun onBindViewHolder(holder: ContactHolder, position: Int) {
-            val contact = contacts[position]
+        override fun onBindViewHolder(holder: JogosHolder, position: Int) {
+            val contact = jogos[position]
 
             holder.modalidade.text = contact.modalidade
             holder.dateCreated.text = contact.inicio.toString()
@@ -87,12 +87,12 @@ class MeusJogosFragment : Fragment() {
         /**
          * The total quantity of items in the list.
          */
-        override fun getItemCount(): Int = contacts.size
+        override fun getItemCount(): Int = jogos.size
 
         /**
          * Called when a view holder is recycled.
          */
-        override fun onViewRecycled(holder: ContactHolder) {
+        override fun onViewRecycled(holder: JogosHolder) {
             super.onViewRecycled(holder)
             Log.d("APP", "Recycled holder at position ${holder.bindingAdapterPosition}")
         }
@@ -111,7 +111,7 @@ class MeusJogosFragment : Fragment() {
     private fun reset(){
         binding.swipeRefreshLayout.isRefreshing = true
         binding.recyclerviewMeusJogos.apply {
-            adapter = ContactAdapter(emptyList())
+            adapter = JogosAdapter(emptyList())
         }
         viewModel.getMeusJogos().observe(viewLifecycleOwner) { status ->
             when(status) {
@@ -122,7 +122,7 @@ class MeusJogosFragment : Fragment() {
                         } else{
                             binding.recyclerviewMeusJogos.apply {
                                 viewModel.usuario.meusJogos = it
-                                adapter = ContactAdapter(it)
+                                adapter = JogosAdapter(it)
                             }
                         }
                     }
@@ -142,7 +142,7 @@ class MeusJogosFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.recyclerviewMeusJogos.apply {
-            adapter = ContactAdapter(viewModel.usuario.meusJogos)
+            adapter = JogosAdapter(viewModel.usuario.meusJogos)
         }
         binding.swipeRefreshLayout.setOnRefreshListener {
             reset()

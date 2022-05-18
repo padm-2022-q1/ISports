@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
-import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentJogosDetailsBinding
 import br.edu.ufabc.isports.databinding.ListParticipantesBinding
+import br.edu.ufabc.isports.model.objects.Participante
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -21,17 +21,13 @@ class JogosDetailsFragment : Fragment() {
     private lateinit var binding: FragmentJogosDetailsBinding
     private val args: JogosDetailsFragmentArgs by navArgs()
     private val viewModel: MainViewModel by activityViewModels()
-    companion object{
-        lateinit var participantes_username: List<String>
-    }
 
-    private inner class ContactAdapter(val contacts: List<String>) :
-        RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
+    private inner class ParticipantesAdapater(val participantes: List<Participante>) :
+        RecyclerView.Adapter<ParticipantesAdapater.ParticipantesHolder>() {
 
 
-        private inner class ContactHolder(itemBinding: ListParticipantesBinding) :
+        private inner class ParticipantesHolder(itemBinding: ListParticipantesBinding) :
             RecyclerView.ViewHolder(itemBinding.root) {
-
             val participante = itemBinding.participante
             }
 
@@ -42,47 +38,31 @@ class JogosDetailsFragment : Fragment() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): ContactHolder =
-            ContactHolder(
+        ): ParticipantesHolder =
+            ParticipantesHolder(
                 ListParticipantesBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
-        fun setIcon(icon:String):Int
-        {
-            return when (icon) {
-                "Basquete" -> {
-                    R.drawable.ic_baseline_sports_basketball
-                }
-                "Tenis" -> {
-                    R.drawable.ic_baseline_sports_tennis
-                }
-                "Vôlei" -> {
-                    R.drawable.ic_baseline_sports_volleyball
-                }
-                else -> R.drawable.ic_baseline_sports_soccer
-            }
-        }
         /**
          * Populate a view holder with data.
          */
-        override fun onBindViewHolder(holder: ContactHolder, position: Int) {
-            val contact = contacts[position]
-
-            holder.participante.text = contact
+        override fun onBindViewHolder(holder: ParticipantesHolder, position: Int) {
+            val participant = participantes[position]
+            holder.participante.text = participant.username
         }
 
         /**
          * The total quantity of items in the list.
          */
-        override fun getItemCount(): Int = contacts.size
+        override fun getItemCount(): Int = participantes.size
 
         /**
          * Called when a view holder is recycled.
          */
-        override fun onViewRecycled(holder: ContactHolder) {
+        override fun onViewRecycled(holder: ParticipantesHolder) {
             super.onViewRecycled(holder)
             Log.d("APP", "Recycled holder at position ${holder.bindingAdapterPosition}")
         }
@@ -127,10 +107,11 @@ class JogosDetailsFragment : Fragment() {
 
         args.jogoItem.takeIf { it?.id?.isNotEmpty() == true }?.also { jogoItem ->
             binding.modalidade.text = jogoItem.modalidade
-            binding.inicio.text = jogoItem.inicio.toString()
-            binding.fim.text = jogoItem.fim.toString()
-            binding.local.text = jogoItem.local
+            binding.inicio.text = StringBuilder().append("Inicio: ").append(jogoItem.inicio.toString())
+            binding.fim.text = StringBuilder().append("Fim: ").append(jogoItem.fim.toString())
+            binding.local.text = StringBuilder().append("Local: ").append(jogoItem.local)
             binding.recyclerviewParticipantes.apply {
+                adapter = ParticipantesAdapater(jogoItem.participantes)
             }
         }
     }
