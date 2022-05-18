@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
+import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentJogosDetailsBinding
 import br.edu.ufabc.isports.databinding.ListParticipantesBinding
 import br.edu.ufabc.isports.model.objects.Participante
@@ -103,6 +104,22 @@ class JogosDetailsFragment : Fragment() {
         }
     }
 
+    private fun setIcon(icon:String):Int
+    {
+        return when (icon) {
+            "Basquete" -> {
+                R.drawable.ic_baseline_sports_basketball
+            }
+            "Tenis" -> {
+                R.drawable.ic_baseline_sports_tennis
+            }
+            "Vôlei" -> {
+                R.drawable.ic_baseline_sports_volleyball
+            }
+            else -> R.drawable.ic_baseline_sports_soccer
+        }
+    }
+
     private fun initTexts() {
 
         args.jogoItem.takeIf { it?.id?.isNotEmpty() == true }?.also { jogoItem ->
@@ -113,6 +130,7 @@ class JogosDetailsFragment : Fragment() {
             binding.recyclerviewParticipantes.apply {
                 adapter = ParticipantesAdapater(jogoItem.participantes)
             }
+            binding.notesListFavorites.setImageResource(setIcon(jogoItem.modalidade))
         }
     }
 
