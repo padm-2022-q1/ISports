@@ -21,11 +21,11 @@ import com.google.android.material.snackbar.Snackbar
 class HistoricoFragment : Fragment() {
     private lateinit var binding: FragmentMeusJogosBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private inner class ContactAdapter(val contacts: List<Jogo>) :
-        RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
+    private inner class HistoricoAdapter(val historico: List<Jogo>) :
+        RecyclerView.Adapter<HistoricoAdapter.HistoricoHolder>() {
 
 
-        private inner class ContactHolder(itemBinding: JogosListItemBinding) :
+        private inner class HistoricoHolder(itemBinding: JogosListItemBinding) :
             RecyclerView.ViewHolder(itemBinding.root) {
 
             val modalidade = itemBinding.jogosListModalidade
@@ -35,7 +35,7 @@ class HistoricoFragment : Fragment() {
             val icon = itemBinding.notesListFavorites
             init {
                 itemBinding.root.setOnClickListener {
-                    viewModel.clickedItemId.value = contacts[bindingAdapterPosition]
+                    viewModel.clickedItemId.value = historico[bindingAdapterPosition]
                 }
 
             }
@@ -47,8 +47,8 @@ class HistoricoFragment : Fragment() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): ContactHolder =
-            ContactHolder(
+        ): HistoricoHolder =
+            HistoricoHolder(
                 JogosListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -73,25 +73,25 @@ class HistoricoFragment : Fragment() {
         /**
          * Populate a view holder with data.
          */
-        override fun onBindViewHolder(holder: ContactHolder, position: Int) {
-            val contact = contacts[position]
+        override fun onBindViewHolder(holder: HistoricoHolder, position: Int) {
+            val historic = historico[position]
 
-            holder.modalidade.text = contact.modalidade
-            holder.dateCreated.text = contact.inicio.toString()
+            holder.modalidade.text = historic.modalidade
+            holder.dateCreated.text = historic.inicio.toString()
             //holder.time.text = contact.timeStart
-            holder.endereco.text = contact.local
-            holder.icon.setImageResource(setIcon(contact.modalidade))
+            holder.endereco.text = historic.local
+            holder.icon.setImageResource(setIcon(historic.modalidade))
         }
 
         /**
          * The total quantity of items in the list.
          */
-        override fun getItemCount(): Int = contacts.size
+        override fun getItemCount(): Int = historico.size
 
         /**
          * Called when a view holder is recycled.
          */
-        override fun onViewRecycled(holder: ContactHolder) {
+        override fun onViewRecycled(holder: HistoricoHolder) {
             super.onViewRecycled(holder)
             Log.d("APP", "Recycled holder at position ${holder.bindingAdapterPosition}")
         }
@@ -131,7 +131,7 @@ class HistoricoFragment : Fragment() {
     private fun reset(){
         binding.swipeRefreshLayout.isRefreshing = true
         binding.recyclerviewMeusJogos.apply {
-            adapter = ContactAdapter(emptyList())
+            adapter = HistoricoAdapter(emptyList())
         }
         viewModel.getHistorico().observe(viewLifecycleOwner) { status ->
             when(status) {
@@ -142,7 +142,7 @@ class HistoricoFragment : Fragment() {
                         } else{
                             binding.recyclerviewMeusJogos.apply {
                                 viewModel.usuario.historico = it
-                                adapter = ContactAdapter(it)
+                                adapter = HistoricoAdapter(it)
                             }
                         }
                     }
@@ -161,7 +161,7 @@ class HistoricoFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.recyclerviewMeusJogos.apply {
-            adapter = ContactAdapter(viewModel.usuario.historico)
+            adapter = HistoricoAdapter(viewModel.usuario.historico)
         }
         binding.swipeRefreshLayout.setOnRefreshListener {
             reset()
