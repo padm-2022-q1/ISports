@@ -28,13 +28,12 @@ class ExplorarFragment : Fragment() {
 
     companion object{
         lateinit var modalidadesJogos: List<String>
-        var filtrado : Boolean = false
     }
-    private inner class ContactAdapter(val contacts: List<Jogo>) :
-        RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
+    private inner class ExplorarAdapter(val explorar: List<Jogo>) :
+        RecyclerView.Adapter<ExplorarAdapter.ExplorarHolder>() {
 
 
-        private inner class ContactHolder(itemBinding: JogosListItemBinding) :
+        private inner class ExplorarHolder(itemBinding: JogosListItemBinding) :
             RecyclerView.ViewHolder(itemBinding.root) {
 
             val modalidade = itemBinding.jogosListModalidade
@@ -44,7 +43,7 @@ class ExplorarFragment : Fragment() {
             val icon = itemBinding.notesListFavorites
             init {
                 itemBinding.root.setOnClickListener {
-                    viewModel.clickedItemId.value = contacts[bindingAdapterPosition]
+                    viewModel.clickedItemId.value = explorar[bindingAdapterPosition]
                 }
 
             }
@@ -56,8 +55,8 @@ class ExplorarFragment : Fragment() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): ContactHolder =
-            ContactHolder(
+        ): ExplorarHolder =
+            ExplorarHolder(
                 JogosListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -82,25 +81,25 @@ class ExplorarFragment : Fragment() {
         /**
          * Populate a view holder with data.
          */
-        override fun onBindViewHolder(holder: ContactHolder, position: Int) {
-            val contact = contacts[position]
+        override fun onBindViewHolder(holder: ExplorarHolder, position: Int) {
+            val explore = explorar[position]
 
-            holder.modalidade.text = contact.modalidade
-            holder.dateCreated.text = contact.inicio.toString()
+            holder.modalidade.text = explore.modalidade
+            holder.dateCreated.text = explore.inicio.toString()
             //holder.time.text = contact.timeStart
-            holder.endereco.text = contact.local
-            holder.icon.setImageResource(setIcon(contact.modalidade))
+            holder.endereco.text = explore.local
+            holder.icon.setImageResource(setIcon(explore.modalidade))
         }
 
         /**
          * The total quantity of items in the list.
          */
-        override fun getItemCount(): Int = contacts.size
+        override fun getItemCount(): Int = explorar.size
 
         /**
          * Called when a view holder is recycled.
          */
-        override fun onViewRecycled(holder: ContactHolder) {
+        override fun onViewRecycled(holder: ExplorarHolder) {
             super.onViewRecycled(holder)
             Log.d("APP", "Recycled holder at position ${holder.bindingAdapterPosition}")
         }
@@ -189,7 +188,7 @@ class ExplorarFragment : Fragment() {
         }
         binding.explorarFiltrarButton.setOnClickListener {
             binding.recyclerviewJogos.apply {
-                adapter = ContactAdapter(emptyList())
+                adapter = ExplorarAdapter(emptyList())
             }
             viewModel.getJogosExplorar(
                 binding.tiposJogos.selectedItem.toString(),
@@ -203,8 +202,7 @@ class ExplorarFragment : Fragment() {
                         //desativar o circular progress bar
                         (status.result as MainViewModel.Result.GetJogos).value.let{
                             binding.recyclerviewJogos.apply {
-                                filtrado=true
-                                adapter = ContactAdapter(it)
+                                adapter = ExplorarAdapter(it)
                             }
                         }
                     }
