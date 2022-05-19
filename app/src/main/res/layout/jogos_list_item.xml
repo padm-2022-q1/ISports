@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/jogos_list_data_dia"
+        android:id="@+id/inicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -30,24 +30,23 @@
         app:layout_constraintTop_toBottomOf="@+id/jogos_list_modalidade" />
 
     <TextView
-        android:id="@+id/jogos_list_time"
+        android:id="@+id/fim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
         android:text="@string/time_jogo"
         android:textSize="11sp"
-        app:layout_constraintStart_toEndOf="@+id/jogos_list_data_dia"
-        app:layout_constraintTop_toBottomOf="@+id/jogos_list_modalidade" />
+        app:layout_constraintStart_toStartOf="@+id/inicio"
+        app:layout_constraintTop_toBottomOf="@+id/inicio" />
     <TextView
-        android:id="@+id/jogos_list_endereco"
+        android:id="@+id/local"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/endereco_jogo"
         android:textSize="11sp"
-        app:layout_constraintStart_toStartOf="@+id/jogos_list_data_dia"
-        app:layout_constraintTop_toBottomOf="@+id/jogos_list_data_dia" />
+        app:layout_constraintStart_toStartOf="@+id/inicio"
+        app:layout_constraintTop_toBottomOf="@+id/fim" />
 
     <ImageView
         android:id="@+id/notes_list_favorites"
@@ -61,7 +60,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/jogos_list_time"
-        app:layout_constraintTop_toBottomOf="@+id/jogos_list_endereco"
+        app:layout_constraintTop_toBottomOf="@+id/local"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

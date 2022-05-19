@@ -20,6 +20,7 @@ import br.edu.ufabc.isports.R
 import br.edu.ufabc.isports.databinding.FragmentExplorarBinding
 import br.edu.ufabc.isports.databinding.JogosListItemBinding
 import br.edu.ufabc.isports.model.objects.Jogo
+import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.time.Duration.Companion.milliseconds
@@ -40,9 +41,9 @@ class ExplorarFragment : Fragment() {
             RecyclerView.ViewHolder(itemBinding.root) {
 
             val modalidade = itemBinding.jogosListModalidade
-            val dateCreated = itemBinding.jogosListDataDia
-            val time = itemBinding.jogosListTime
-            val endereco = itemBinding.jogosListEndereco
+            val inicio = itemBinding.inicio
+            val fim = itemBinding.fim
+            val local = itemBinding.local
             val icon = itemBinding.notesListFavorites
             init {
                 itemBinding.root.setOnClickListener {
@@ -88,9 +89,9 @@ class ExplorarFragment : Fragment() {
             val explore = explorar[position]
 
             holder.modalidade.text = explore.modalidade
-            holder.dateCreated.text = explore.inicio.toString()
-            //holder.time.text = contact.timeStart
-            holder.endereco.text = explore.local
+            holder.inicio.text = StringBuilder().append("Inicio: ").append(explore.inicio.toString())
+            holder.fim.text = StringBuilder().append("Fim: ").append(explore.fim.toString())
+            holder.local.text = StringBuilder().append("Local: ").append(explore.local)
             holder.icon.setImageResource(setIcon(explore.modalidade))
         }
 

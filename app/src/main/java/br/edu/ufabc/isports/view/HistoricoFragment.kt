@@ -17,6 +17,7 @@ import br.edu.ufabc.isports.databinding.JogosListItemBinding
 import br.edu.ufabc.isports.model.objects.Jogo
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.lang.StringBuilder
 
 class HistoricoFragment : Fragment() {
     private lateinit var binding: FragmentMeusJogosBinding
@@ -30,9 +31,9 @@ class HistoricoFragment : Fragment() {
             RecyclerView.ViewHolder(itemBinding.root) {
 
             val modalidade = itemBinding.jogosListModalidade
-            val dateCreated = itemBinding.jogosListDataDia
-            val time = itemBinding.jogosListTime
-            val endereco = itemBinding.jogosListEndereco
+            val inicio = itemBinding.inicio
+            val fim = itemBinding.fim
+            val local = itemBinding.local
             val icon = itemBinding.notesListFavorites
             init {
                 itemBinding.root.setOnClickListener {
@@ -78,9 +79,9 @@ class HistoricoFragment : Fragment() {
             val historic = historico[position]
 
             holder.modalidade.text = historic.modalidade
-            holder.dateCreated.text = historic.inicio.toString()
-            //holder.time.text = contact.timeStart
-            holder.endereco.text = historic.local
+            holder.inicio.text = StringBuilder().append("Inicio: ").append(historic.inicio.toString())
+            holder.fim.text = StringBuilder().append("Fim: ").append(historic.fim.toString())
+            holder.local.text = StringBuilder().append("Local: ").append(historic.local)
             holder.icon.setImageResource(setIcon(historic.modalidade))
         }
 
