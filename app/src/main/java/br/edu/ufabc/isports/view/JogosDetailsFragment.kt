@@ -17,6 +17,8 @@ import br.edu.ufabc.isports.databinding.ListParticipantesBinding
 import br.edu.ufabc.isports.model.objects.Participante
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
+import java.util.*
 
 open class JogosDetailsFragment : Fragment() {
 
@@ -134,11 +136,11 @@ open class JogosDetailsFragment : Fragment() {
     }
 
     private fun initTexts() {
-
+        val sdf = SimpleDateFormat("dd/MM/yyyy H:mm", Locale.getDefault())
         args.jogoItem.takeIf { it?.id?.isNotEmpty() == true }?.also { jogoItem ->
             binding.modalidade.text = jogoItem.modalidade
-            binding.inicio.text = StringBuilder().append("Inicio: ").append(jogoItem.inicio.toString())
-            binding.fim.text = StringBuilder().append("Fim: ").append(jogoItem.fim.toString())
+            binding.inicio.text = StringBuilder().append("Inicio: ").append(sdf.format(jogoItem.inicio))
+            binding.fim.text = StringBuilder().append("Fim: ").append(sdf.format(jogoItem.fim))
             binding.local.text = StringBuilder().append("Local: ").append(jogoItem.local)
             binding.recyclerviewParticipantes.apply {
                 adapter = ParticipantesAdapater(jogoItem.participantes)

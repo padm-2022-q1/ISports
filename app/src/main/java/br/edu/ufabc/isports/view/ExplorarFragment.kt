@@ -87,10 +87,10 @@ class ExplorarFragment : Fragment() {
          */
         override fun onBindViewHolder(holder: ExplorarHolder, position: Int) {
             val explore = explorar[position]
-
+            val sdf = SimpleDateFormat("dd/MM/yyyy H:mm", Locale.getDefault())
             holder.modalidade.text = explore.modalidade
-            holder.inicio.text = StringBuilder().append("Inicio: ").append(explore.inicio.toString())
-            holder.fim.text = StringBuilder().append("Fim: ").append(explore.fim.toString())
+            holder.inicio.text = StringBuilder().append("Inicio: ").append(sdf.format(explore.inicio))
+            holder.fim.text = StringBuilder().append("Fim: ").append(sdf.format(explore.fim))
             holder.local.text = StringBuilder().append("Local: ").append(explore.local)
             holder.icon.setImageResource(setIcon(explore.modalidade))
         }

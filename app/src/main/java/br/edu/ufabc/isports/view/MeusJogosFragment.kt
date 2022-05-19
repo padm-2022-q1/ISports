@@ -18,6 +18,8 @@ import br.edu.ufabc.isports.model.objects.Jogo
 import br.edu.ufabc.isports.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.lang.StringBuilder
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MeusJogosFragment : Fragment() {
     private lateinit var binding: FragmentMeusJogosBinding
@@ -78,10 +80,10 @@ class MeusJogosFragment : Fragment() {
          */
         override fun onBindViewHolder(holder: JogosHolder, position: Int) {
             val contact = jogos[position]
-
+            val sdf = SimpleDateFormat("dd/MM/yyyy H:mm", Locale.getDefault())
             holder.modalidade.text = contact.modalidade
-            holder.inicio.text = StringBuilder().append("Inicio: ").append(contact.inicio.toString())
-            holder.fim.text = StringBuilder().append("Fim: ").append(contact.fim.toString())
+            holder.inicio.text = StringBuilder().append("Inicio: ").append(sdf.format(contact.inicio))
+            holder.fim.text = StringBuilder().append("Fim: ").append(sdf.format(contact.fim))
             holder.local.text = StringBuilder().append("Local: ").append(contact.local)
             holder.icon.setImageResource(setIcon(contact.modalidade))
         }
